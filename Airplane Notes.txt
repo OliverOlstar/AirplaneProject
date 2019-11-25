@@ -1,0 +1,23 @@
+Faster you go the more upward force (lift)
+If you tilt the wings the air will create an upward force when the bounce off the wing
+
+Rutter (mid back blade) controls yaw
+Elevator (back 2 blades) control pitch
+Ailerons control roll
+
+When the plane tips the force direction created by the wings changes this allows the plane to turn. This also decreases the component of the lift pointing upwards
+
+If the force of lift is > than the force of gravity the airplane elevation increases
+
+There is a certain angle which will give max lift, if increased past the angle the lift will decrease (Stall)
+
+Incoming airflow can be altered by change in speed
+
+To lower altitude reduce thrust, slow down, and lift will decrease resulting in a larger net downward force
+
+Land in the wind as to shorten the amount of runway necessary
+Good to take off at the wind to increase airflow over the wings, increasing lift
+
+Drag
+
+Once airborne, velocity of the plane is determined by the velocity of the plane relative to the surrounding air + velocity of the wind.
