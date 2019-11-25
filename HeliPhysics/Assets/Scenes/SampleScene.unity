@@ -338,7 +338,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &550846321
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -773,7 +773,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 697297fb58524af4c99fa0d903e1a70a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 100
+  _velocity: {x: 0, y: 0, z: 0}
+  _lift: {x: 0, y: 0, z: 0}
+  _gravity: {x: 0, y: -9.81, z: 0}
+  thrust: 10
+  _windSpeed: 1
 --- !u!114 &1111667625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -786,7 +790,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5867bf3a5be726458250f618f590b35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yawnSpeed: 45
+  yawnSpeed: 20
+  pitchSpeed: 45
   rollSpeed: 80
   TurnDampening: 10
 --- !u!4 &1111667626
@@ -801,8 +806,9 @@ Transform:
   m_LocalScale: {x: 0.7634542, y: 0.7261814, z: 4.6437}
   m_Children:
   - {fileID: 1444734432}
+  - {fileID: 1509216640}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1190315537
 PrefabInstance:
@@ -1192,11 +1198,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1509216639}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 441.8124, y: 15.395029, z: 756.7491}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.83915377, y: -4.8403482, z: 1.1534076}
+  m_LocalScale: {x: 1.3098361, y: 1.3770664, z: 0.2153455}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_Father: {fileID: 1111667626}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1784265115
 GameObject:
@@ -1320,8 +1326,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1807430463}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.57, z: -0.401}
-  m_LocalScale: {x: 0.113110244, y: 0.31967214, z: 0.20037621}
+  m_LocalPosition: {x: 0, y: 0.652, z: -0.4141}
+  m_LocalScale: {x: 0.113110244, y: 0.4922631, z: 0.20037621}
   m_Children: []
   m_Father: {fileID: 1444734432}
   m_RootOrder: 0

@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlaneController : MonoBehaviour
 {
     [SerializeField] private float yawnSpeed = 5;
+    [SerializeField] private float pitchSpeed = 5;
     [SerializeField] private float rollSpeed = 5;
 
     [Space]
@@ -23,14 +24,20 @@ public class PlaneController : MonoBehaviour
 
     private void Rotation()
     {
-        transform.Rotate(Vector3.right, Time.deltaTime * yawnSpeed * Input.GetAxis("Vertical"));
-        transform.Rotate(Vector3.forward, Time.deltaTime * rollSpeed * -Input.GetAxis("Horizontal"));
+        //Rutter
+        transform.Rotate(Vector3.up, Time.deltaTime * yawnSpeed * Input.GetAxis("Yawn"));
+
+        //Elevators
+        transform.Rotate(Vector3.right, Time.deltaTime * pitchSpeed * Input.GetAxis("Pitch"));
+
+        //Ailerons
+        transform.Rotate(Vector3.forward, Time.deltaTime * rollSpeed * -Input.GetAxis("Roll"));
     }
 
     private void LerpRotation()
     {
-        _LocalRotation += Time.deltaTime * yawnSpeed * Input.GetAxis("Vertical") * Vector3.right;
-        _LocalRotation += Time.deltaTime * rollSpeed * -Input.GetAxis("Horizontal") * Vector3.forward;
+        _LocalRotation += Time.deltaTime * yawnSpeed * Input.GetAxis("Pitch") * Vector3.right;
+        _LocalRotation += Time.deltaTime * rollSpeed * -Input.GetAxis("Roll") * Vector3.forward;
 
         Quaternion TargetQ = Quaternion.Euler(_LocalRotation);
         transform.localRotation = Quaternion.Slerp(transform.localRotation, TargetQ, Time.deltaTime * TurnDampening);

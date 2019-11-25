@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class PlanePhysics : MonoBehaviour
 {
-    [SerializeField] private float speed;
     private Rigidbody _rb;
 
-    private Vector3 velocity;
+    [SerializeField] private Vector3 _velocity;
+    [SerializeField] private Vector3 _lift;
+    [SerializeField] private Vector3 _gravity;
+    public float thrust;
+    [SerializeField] private float _windSpeed = 1;
 
     void Start()
     {
@@ -16,8 +19,14 @@ public class PlanePhysics : MonoBehaviour
 
     void Update()
     {
-        velocity = transform.forward * Time.deltaTime * speed;
+        _velocity += transform.forward * thrust * Time.deltaTime;
 
-        transform.position += velocity * Time.deltaTime;
+        _velocity += _gravity * Time.deltaTime;
+
+        _lift = transform.up * thrust * _windSpeed;
+        _velocity += _lift * Time.deltaTime;
+
+
+        transform.position += _velocity * Time.deltaTime;
     }
 }
