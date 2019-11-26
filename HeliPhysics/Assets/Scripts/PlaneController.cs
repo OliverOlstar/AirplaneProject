@@ -19,11 +19,14 @@ public class PlaneController : MonoBehaviour
 
     void Update()
     {
+        //Change Effect based on current speed
         Rotation();
     }
 
     private void Rotation()
     {
+        //Quaternion rotation = transform.rotation;
+
         //Rutter
         transform.Rotate(Vector3.up, Time.deltaTime * yawnSpeed * Input.GetAxis("Yawn"));
 
@@ -49,13 +52,5 @@ public class PlaneController : MonoBehaviour
         dir = Quaternion.Euler(angles) * dir; // rotate it
         point = dir + pivot; // calculate rotated point
         return point; // return it
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position - transform.right, transform.position + transform.right);
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawLine(transform.position - transform.forward, transform.position + transform.forward);
     }
 }

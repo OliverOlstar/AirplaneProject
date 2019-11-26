@@ -51,7 +51,7 @@ LightmapSettings:
     m_IndirectOutputScale: 1
     m_AlbedoBoost: 1
     m_EnvironmentLightingMode: 0
-    m_EnableBakedLightmaps: 1
+    m_EnableBakedLightmaps: 0
     m_EnableRealtimeLightmaps: 1
   m_LightmapEditorSettings:
     serializedVersion: 12
@@ -683,7 +683,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 4408e7f93342b60479a3fee5c139393c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -738,6 +738,7 @@ GameObject:
   - component: {fileID: 1111667625}
   - component: {fileID: 1111667624}
   - component: {fileID: 1111667623}
+  - component: {fileID: 1111667627}
   m_Layer: 0
   m_Name: Airplane CenterOfMass
   m_TagString: Untagged
@@ -773,11 +774,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 697297fb58524af4c99fa0d903e1a70a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _velocity: {x: 0, y: 0, z: 0}
+  _horizontalVelocity: {x: 0, y: 0, z: 0}
+  _verticalVelocity: {x: 0, y: 0, z: 0}
   _lift: {x: 0, y: 0, z: 0}
   _gravity: {x: 0, y: -9.81, z: 0}
+  _drag: {x: 0, y: 0, z: 0}
+  _verticalDrag: {x: 0, y: 0, z: 0}
   thrust: 10
   _windSpeed: 1
+  _dragFactor: 0
+  _dragDefault: 0
+  _liftMax: 12
+  _bestLiftAngle: 0.75
 --- !u!114 &1111667625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -810,6 +818,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1111667627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111667622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cf9509dc8a22e249a0baac4a44c5304, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _physics: {fileID: 1111667624}
+  _drawLength: 0.3
+  _drawLiftPath: 0
 --- !u!1001 &1190315537
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -821,6 +844,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 5688443931053791715, guid: 280b55a2e946809418577ba6f4095e90,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5688443931053791714, guid: 280b55a2e946809418577ba6f4095e90,
         type: 3}
@@ -957,7 +985,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 4408e7f93342b60479a3fee5c139393c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1035,7 +1063,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 3b891931fc6fc80419d7ef5b3f704ae8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1145,7 +1173,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 4408e7f93342b60479a3fee5c139393c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1362,7 +1390,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 4408e7f93342b60479a3fee5c139393c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
