@@ -84,7 +84,7 @@ public class PlanePhysics : MonoBehaviour
         {
             t = ((t - 1) * inverseRacio) + 1;
             p1 = 1;
-            p2 = 0.3f;
+            p2 = 0f;
             p3 = 0;
         }
 
