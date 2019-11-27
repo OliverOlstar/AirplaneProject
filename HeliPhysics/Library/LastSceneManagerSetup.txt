@@ -1,5 +1,5 @@
 sceneSetups:
-- path: C:/Users/Olsta/Downloads/AI_A1/Assets/Scenes/SampleScene.unity
+- path: Assets/Scenes/SampleScene.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

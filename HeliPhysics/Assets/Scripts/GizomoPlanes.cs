@@ -39,6 +39,7 @@ public class GizomoPlanes : MonoBehaviour
 
                 Gizmos.DrawLine(transform.position, transform.position + Vector3.forward * 10);
                 Gizmos.DrawLine(transform.position + 0.5f * Vector3.up, transform.position + Vector3.forward * 10 + 0.5f * Vector3.up);
+                Gizmos.DrawLine(transform.position + 5 * Vector3.forward, transform.position + Vector3.forward * 5 + 2 * Vector3.up);
             }
         }
     }

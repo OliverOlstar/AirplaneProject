@@ -17,6 +17,7 @@ public class PlanePhysics : MonoBehaviour
     [SerializeField] private float _dragFactor;
     [SerializeField] private float _dragDefault;
     [SerializeField] private float _liftMax;
+    [SerializeField] private float _mass;
     [SerializeField] [Range(0.5f, 1)] private float _bestLiftAngle;
 
     void Start()
@@ -77,14 +78,14 @@ public class PlanePhysics : MonoBehaviour
         {
             t *= racio;
             p1 = 0;
-            p2 = 0f;
+            p2 = -0.02f;
             p3 = 1;
         }
         else if (t > _bestLiftAngle)
         {
             t = ((t - 1) * inverseRacio) + 1;
             p1 = 1;
-            p2 = 0f;
+            p2 = 0.1f;
             p3 = 0;
         }
 
@@ -98,6 +99,6 @@ public class PlanePhysics : MonoBehaviour
     {
 
 
-        _verticalDrag = Vector3.one;
+        _verticalDrag = Vector3.zero;
     }
 }

@@ -37,6 +37,6 @@ public class PlanePhysicsNew : MonoBehaviour
         _velocity += _drag * Time.deltaTime;
 
 
-        transform.position += _velocity * Time.deltaTime;
+        //transform.position += _velocity * Time.deltaTime;
     }
 }
