@@ -10,19 +10,27 @@ public class GizomoPlanes : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        Vector3 offset = Vector3.zero;
+
         if (_physics)
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawLine(transform.position, transform.position + _physics._gravity * _drawLength);
-            Gizmos.color = Color.green;
-            Gizmos.DrawLine(transform.position, transform.position + _physics._verticalVelocity * _drawLength);
-            Gizmos.DrawLine(transform.position, transform.position + _physics._horizontalVelocity * _drawLength);
+            Gizmos.DrawLine(transform.position + offset, transform.position + _physics._gravity * _drawLength + offset);
             Gizmos.color = Color.blue;
-            Gizmos.DrawLine(transform.position, transform.position + _physics._lift * _drawLength);
+            Gizmos.DrawLine(transform.position + offset, transform.position + _physics._lift * _drawLength + offset);
+
+            offset += Vector3.forward * 0.1f;
+            Gizmos.color = Color.green;
+            Gizmos.DrawLine(transform.position + offset, transform.position + _physics._verticalVelocity * _drawLength + offset);
+            Gizmos.DrawLine(transform.position, transform.position + _physics._horizontalVelocity * _drawLength);
+
             Gizmos.color = Color.cyan;
             Gizmos.DrawLine(transform.position, transform.position + _physics.thrust * transform.forward * _drawLength);
+
+            offset += Vector3.forward * 0.1f;
             Gizmos.color = Color.black;
-            Gizmos.DrawLine(transform.position, transform.position + _physics._drag);
+            Gizmos.DrawLine(transform.position + offset, transform.position + _physics._verticalDrag + offset);
+            Gizmos.DrawLine(transform.position, transform.position + _physics._horizontalDrag * _drawLength);
 
             if (_drawLiftPath)
             {

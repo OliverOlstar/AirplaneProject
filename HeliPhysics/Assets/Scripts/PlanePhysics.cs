@@ -10,12 +10,16 @@ public class PlanePhysics : MonoBehaviour
     public Vector3 _verticalVelocity;
     public Vector3 _lift;
     public Vector3 _gravity;
-    public Vector3 _drag;
+    public Vector3 _horizontalDrag;
     public Vector3 _verticalDrag;
     public float thrust;
     [SerializeField] private float _windSpeed = 1;
-    [SerializeField] private float _dragFactor;
-    [SerializeField] private float _dragDefault;
+    [SerializeField] private float _dragVFactor;
+    [SerializeField] private float _dragVMult;
+    [SerializeField] private float _dragVDefault;
+    [SerializeField] private float _dragHFactor;
+    [SerializeField] private float _dragHMult;
+    [SerializeField] private float _dragHDefault;
     [SerializeField] private float _liftMax;
     [SerializeField] private float _mass;
     [SerializeField] [Range(0.5f, 1)] private float _bestLiftAngle;
@@ -27,8 +31,6 @@ public class PlanePhysics : MonoBehaviour
 
     void Update()
     {
-        //_velocity = Vector3.zero;
-
         _horizontalVelocity = transform.forward * thrust;
         _horizontalVelocity.y = 0;
 
@@ -40,14 +42,13 @@ public class PlanePhysics : MonoBehaviour
         CalculateVerticalDrag();
         _verticalVelocity += _verticalDrag * Time.deltaTime;
 
-        //_lift = transform.up * Vector3.Project(_velocity, transform.forward).magnitude * _windSpeed;
-        //_lift = transform.up * thrust * _windSpeed;
-        //_lift = Vector3.Project(_lift, Vector3.up);
+        CalculateHorizontalDrag();
+        _horizontalVelocity += _horizontalDrag * Time.deltaTime;
 
         //_drag = _velocity.normalized * _dragDefault + _velocity * _dragFactor;
         //_velocity -= _drag * Time.deltaTime;
 
-        Vector3 _velocity = _verticalVelocity + _horizontalVelocity;
+        Vector3 _velocity = _verticalVelocity /*+ _horizontalVelocity*/;
         transform.position += _velocity * Time.deltaTime * 5;
     }
 
@@ -78,7 +79,7 @@ public class PlanePhysics : MonoBehaviour
         {
             t *= racio;
             p1 = 0;
-            p2 = -0.02f;
+            p2 = -0.43f;
             p3 = 1;
         }
         else if (t > _bestLiftAngle)
@@ -97,8 +98,19 @@ public class PlanePhysics : MonoBehaviour
 
     private void CalculateVerticalDrag()
     {
+        float dragMagnitude = (Mathf.Pow(_verticalVelocity.y * _dragVFactor, 2) - _dragVDefault) / 2 * _dragVMult;
+        float direction = _verticalVelocity.y / Mathf.Abs(_verticalVelocity.y);
+        _verticalDrag = dragMagnitude * Vector3.up * -direction;
+    }
 
+    private void CalculateHorizontalDrag()
+    {
+        float dragMagnitude = (Mathf.Pow(_horizontalVelocity.y * _dragHFactor, 2) - _dragHDefault) / 2 * _dragHMult;
 
-        _verticalDrag = Vector3.zero;
+        Vector3 direction = _horizontalVelocity;
+        direction.y = 0;
+        direction.Normalize();
+
+        _horizontalDrag = dragMagnitude *  -direction;
     }
 }
