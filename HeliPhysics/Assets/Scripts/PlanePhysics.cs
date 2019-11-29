@@ -12,16 +12,20 @@ public class PlanePhysics : MonoBehaviour
     public Vector3 _gravity;
     public Vector3 _horizontalDrag;
     public Vector3 _verticalDrag;
+    public float _verticalEffectOnHorizontal;
     public float thrust;
-    [SerializeField] private float _windSpeed = 1;
+    //[SerializeField] private Vector3 _wind;
     [SerializeField] private float _dragVFactor;
     [SerializeField] private float _dragVMult;
     [SerializeField] private float _dragVDefault;
     [SerializeField] private float _dragHFactor;
     [SerializeField] private float _dragHMult;
     [SerializeField] private float _dragHDefault;
+    [SerializeField] private float _liftMultH;
     [SerializeField] private float _liftMax;
-    [SerializeField] private float _mass;
+    [SerializeField] private float _VoHMultDown;
+    [SerializeField] private float _VoHMultUp;
+    //[SerializeField] private float _mass;
     [SerializeField] [Range(0.5f, 1)] private float _bestLiftAngle;
 
     void Start()
@@ -31,8 +35,11 @@ public class PlanePhysics : MonoBehaviour
 
     void Update()
     {
-        _horizontalVelocity = transform.forward * thrust;
+        _horizontalVelocity += transform.forward * thrust * Time.deltaTime;
         _horizontalVelocity.y = 0;
+
+        CalculateHorizontalDrag();
+        _horizontalVelocity += _horizontalDrag * Time.deltaTime;
 
         _verticalVelocity += _gravity * Time.deltaTime;
 
@@ -42,13 +49,10 @@ public class PlanePhysics : MonoBehaviour
         CalculateVerticalDrag();
         _verticalVelocity += _verticalDrag * Time.deltaTime;
 
-        CalculateHorizontalDrag();
-        _horizontalVelocity += _horizontalDrag * Time.deltaTime;
+        CalculateVerticalEffectOnHorizontal();
+        _horizontalVelocity += _verticalEffectOnHorizontal * _horizontalVelocity.normalized * Time.deltaTime;
 
-        //_drag = _velocity.normalized * _dragDefault + _velocity * _dragFactor;
-        //_velocity -= _drag * Time.deltaTime;
-
-        Vector3 _velocity = _verticalVelocity /*+ _horizontalVelocity*/;
+        Vector3 _velocity = _verticalVelocity + _horizontalVelocity;
         transform.position += _velocity * Time.deltaTime * 5;
     }
 
@@ -62,13 +66,14 @@ public class PlanePhysics : MonoBehaviour
             angle = 360 - angle + 180;
 
         float angle01 = (angle - 90) / 180;
-        float liftMag = GetQuadraticCurveValue(angle01) * _liftMax;
+        float quadraticValue = GetQuadraticCurveValue(angle01, _bestLiftAngle, -0.5f, -0.8f, 1, 1, 0.1f, 0);
+        float liftMag = quadraticValue * _liftMax * (_horizontalVelocity.magnitude * _liftMultH);
 
         //Debug.Log(transform.localEulerAngles.x + " | Angle01: " + angle01 + " | LiftMag: " + liftMag);
         _lift = Vector3.Project(transform.up * liftMag, Vector3.up);
     }
 
-    public float GetQuadraticCurveValue(float t)
+    public float GetQuadraticCurveValue(float t, float pMid, float p1_1, float p1_2, float p1_3, float p2_1, float p2_2, float p2_3)
     {
         float racio = 1 / _bestLiftAngle;
         float inverseRacio = 1 / (1 - _bestLiftAngle);
@@ -78,16 +83,16 @@ public class PlanePhysics : MonoBehaviour
         if (t <= _bestLiftAngle)
         {
             t *= racio;
-            p1 = 0;
-            p2 = -0.43f;
-            p3 = 1;
+            p1 = p1_1;
+            p2 = p1_2;
+            p3 = p1_3;
         }
-        else if (t > _bestLiftAngle)
+        else if (t > pMid)
         {
             t = ((t - 1) * inverseRacio) + 1;
-            p1 = 1;
-            p2 = 0.1f;
-            p3 = 0;
+            p1 = p2_1;
+            p2 = p2_2;
+            p3 = p2_3;
         }
 
         float u = 1 - t;
@@ -105,12 +110,22 @@ public class PlanePhysics : MonoBehaviour
 
     private void CalculateHorizontalDrag()
     {
-        float dragMagnitude = (Mathf.Pow(_horizontalVelocity.y * _dragHFactor, 2) - _dragHDefault) / 2 * _dragHMult;
+        float dragMagnitude = (Mathf.Pow(_horizontalVelocity.magnitude * _dragHFactor, 2) - _dragHDefault) / 2 * _dragHMult;
+        Debug.Log(dragMagnitude + " DM");
 
         Vector3 direction = _horizontalVelocity;
         direction.y = 0;
         direction.Normalize();
+        Debug.Log(direction + " Dir");
 
-        _horizontalDrag = dragMagnitude *  -direction;
+        _horizontalDrag = dragMagnitude * -direction;
+    }
+
+    private void CalculateVerticalEffectOnHorizontal()
+    {
+        float mult = (transform.forward.y < 0 ? _VoHMultDown : _VoHMultUp);
+        float angleMult = GetQuadraticCurveValue(transform.forward.y, 0.5f, 0, 0.5f, 1, 1, 2, 0);
+        _verticalEffectOnHorizontal = angleMult * _verticalVelocity.y * mult;
+
     }
 }
