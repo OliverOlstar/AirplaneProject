@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlanePhysics : MonoBehaviour
 {
     private Rigidbody _rb;
@@ -12,6 +13,7 @@ public class PlanePhysics : MonoBehaviour
     public Vector3 _gravity;
     public Vector3 _horizontalDrag;
     public Vector3 _verticalDrag;
+    public Vector3 _angluarVelocity;
     public float _verticalEffectOnHorizontal;
     public float thrust;
     //[SerializeField] private Vector3 _wind;
@@ -26,6 +28,8 @@ public class PlanePhysics : MonoBehaviour
     [SerializeField] private float _liftMax;
     [SerializeField] private float _VoHMultDown;
     [SerializeField] private float _VoHMultUp;
+
+    [SerializeField] private float _AngluarInfluence;
     //[SerializeField] private float _mass;
     [SerializeField] [Range(0.5f, 1)] private float _bestLiftAngle;
 
@@ -60,6 +64,10 @@ public class PlanePhysics : MonoBehaviour
 
         Vector3 _velocity = _verticalVelocity + _horizontalVelocity;
         transform.position += _velocity * Time.deltaTime * 5;
+
+
+        _angluarVelocity = Vector3.Project(-transform.right, Vector3.up);
+        transform.localEulerAngles += _angluarVelocity * Time.deltaTime * _AngluarInfluence * _horizontalVelocity.magnitude;
     }
 
     private void CalculateLift()
