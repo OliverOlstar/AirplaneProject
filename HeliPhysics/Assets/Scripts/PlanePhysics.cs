@@ -22,6 +22,7 @@ public class PlanePhysics : MonoBehaviour
     [SerializeField] private float _dragHMult;
     [SerializeField] private float _dragHDefault;
     [SerializeField] private float _liftMultH;
+    [SerializeField] private float _liftMinH = 0.1f;
     [SerializeField] private float _liftMax;
     [SerializeField] private float _VoHMultDown;
     [SerializeField] private float _VoHMultUp;
@@ -52,6 +53,11 @@ public class PlanePhysics : MonoBehaviour
         CalculateVerticalEffectOnHorizontal();
         _horizontalVelocity += _verticalEffectOnHorizontal * _horizontalVelocity.normalized * Time.deltaTime;
 
+        Vector3 forward = transform.forward;
+        forward.y = 0;
+        forward.Normalize();
+        _horizontalVelocity = _horizontalVelocity.magnitude * forward;
+
         Vector3 _velocity = _verticalVelocity + _horizontalVelocity;
         transform.position += _velocity * Time.deltaTime * 5;
     }
@@ -67,7 +73,7 @@ public class PlanePhysics : MonoBehaviour
 
         float angle01 = (angle - 90) / 180;
         float quadraticValue = GetQuadraticCurveValue(angle01, _bestLiftAngle, -0.5f, -0.8f, 1, 1, 0.1f, 0);
-        float liftMag = quadraticValue * _liftMax * (_horizontalVelocity.magnitude * _liftMultH);
+        float liftMag = quadraticValue * _liftMax * (_horizontalVelocity.magnitude * _liftMultH + _liftMinH);
 
         //Debug.Log(transform.localEulerAngles.x + " | Angle01: " + angle01 + " | LiftMag: " + liftMag);
         _lift = Vector3.Project(transform.up * liftMag, Vector3.up);
@@ -124,7 +130,7 @@ public class PlanePhysics : MonoBehaviour
     private void CalculateVerticalEffectOnHorizontal()
     {
         float mult = (transform.forward.y < 0 ? _VoHMultDown : _VoHMultUp);
-        float angleMult = GetQuadraticCurveValue(transform.forward.y, 0.5f, 0, 0.5f, 1, 1, 2, 0);
+        float angleMult = GetQuadraticCurveValue(transform.forward.y, 0.5f, 0, 0.5f, 1, 1, 1.8f, 0);
         _verticalEffectOnHorizontal = angleMult * _verticalVelocity.y * mult;
 
     }

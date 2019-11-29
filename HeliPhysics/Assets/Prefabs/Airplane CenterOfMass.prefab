@@ -259,13 +259,15 @@ MonoBehaviour:
   _dragVFactor: 0.7
   _dragVMult: 1.3
   _dragVDefault: 0
-  _dragHFactor: 0.5
-  _dragHMult: 0.8
+  _dragHFactor: 0.2
+  _dragHMult: 1
   _dragHDefault: 0
   _liftMultH: 0.085
+  _liftMinH: 0.1
   _liftMax: 20
-  _VoHMult: 8
-  _bestLiftAngle: 0.591
+  _VoHMultDown: 1
+  _VoHMultUp: -2
+  _bestLiftAngle: 0.65
 --- !u!54 &748107487360155481
 Rigidbody:
   m_ObjectHideFlags: 0

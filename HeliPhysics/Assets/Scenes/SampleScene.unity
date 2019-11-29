@@ -893,48 +893,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 748107487360155478, guid: 917e0675d5b82954ba6ee374508d7c5a,
         type: 3}
-      propertyPath: _liftMax
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 748107487360155478, guid: 917e0675d5b82954ba6ee374508d7c5a,
-        type: 3}
-      propertyPath: _VoHMult
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 748107487360155478, guid: 917e0675d5b82954ba6ee374508d7c5a,
-        type: 3}
-      propertyPath: _bestLiftAngle
-      value: 0.65
-      objectReference: {fileID: 0}
-    - target: {fileID: 748107487360155478, guid: 917e0675d5b82954ba6ee374508d7c5a,
-        type: 3}
-      propertyPath: _VoHMultDown
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 748107487360155478, guid: 917e0675d5b82954ba6ee374508d7c5a,
-        type: 3}
-      propertyPath: _VoHMultUp
-      value: -2
-      objectReference: {fileID: 0}
-    - target: {fileID: 748107487360155478, guid: 917e0675d5b82954ba6ee374508d7c5a,
-        type: 3}
-      propertyPath: _dragHMult
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 748107487360155478, guid: 917e0675d5b82954ba6ee374508d7c5a,
-        type: 3}
-      propertyPath: _dragHFactor
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 748107487360155478, guid: 917e0675d5b82954ba6ee374508d7c5a,
-        type: 3}
       propertyPath: thrust
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 748107487360155477, guid: 917e0675d5b82954ba6ee374508d7c5a,
-        type: 3}
-      propertyPath: _drawLiftPath
-      value: 0
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 917e0675d5b82954ba6ee374508d7c5a, type: 3}
