@@ -6,7 +6,9 @@ using UnityEngine;
 public class PlanePhysics : MonoBehaviour
 {
     private Rigidbody _rb;
+    private PlaneWheels[] _wheels;
 
+    public Vector3 _velocity;
     public Vector3 _horizontalVelocity;
     public Vector3 _verticalVelocity;
     public Vector3 _lift;
@@ -36,6 +38,7 @@ public class PlanePhysics : MonoBehaviour
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
+        _wheels = GetComponentsInChildren<PlaneWheels>();
     }
 
     void Update()
@@ -62,12 +65,27 @@ public class PlanePhysics : MonoBehaviour
         forward.Normalize();
         _horizontalVelocity = _horizontalVelocity.magnitude * forward;
 
-        Vector3 _velocity = _verticalVelocity + _horizontalVelocity;
+        //Calculate Angular;
+        _angluarVelocity = Vector3.Project(-transform.right, Vector3.up) * Time.deltaTime * _AngluarInfluence * _horizontalVelocity.magnitude;
+
+        _velocity = _verticalVelocity + _horizontalVelocity;
+        //TODO Check with wheels
+
+        CalculateWheelsForces();
+        _verticalVelocity.y = _velocity.y;
+        _horizontalVelocity = new Vector3(_velocity.x, 0, _velocity.z);
+
+
         transform.position += _velocity * Time.deltaTime * 5;
+        transform.localEulerAngles += _angluarVelocity;
+    }
 
-
-        _angluarVelocity = Vector3.Project(-transform.right, Vector3.up);
-        transform.localEulerAngles += _angluarVelocity * Time.deltaTime * _AngluarInfluence * _horizontalVelocity.magnitude;
+    private void CalculateWheelsForces()
+    {
+        foreach (PlaneWheels wheel in _wheels)
+        {
+            wheel.CheckWithWheel();
+        }
     }
 
     private void CalculateLift()
@@ -125,12 +143,10 @@ public class PlanePhysics : MonoBehaviour
     private void CalculateHorizontalDrag()
     {
         float dragMagnitude = (Mathf.Pow(_horizontalVelocity.magnitude * _dragHFactor, 2) - _dragHDefault) / 2 * _dragHMult;
-        Debug.Log(dragMagnitude + " DM");
 
         Vector3 direction = _horizontalVelocity;
         direction.y = 0;
         direction.Normalize();
-        Debug.Log(direction + " Dir");
 
         _horizontalDrag = dragMagnitude * -direction;
     }
