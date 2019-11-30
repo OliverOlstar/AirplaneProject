@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlaneVisuals : MonoBehaviour
 {
-    [SerializeField] private Transform _target;
+    public Transform _target;
     [SerializeField] private float rotationDampening = 5;
     [SerializeField] private float positionDampening = 5;
 
@@ -18,7 +18,10 @@ public class PlaneVisuals : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
+        if (_target == null) return;
+
         transform.rotation = Quaternion.Slerp(transform.rotation, _target.rotation, Time.deltaTime * rotationDampening);
-        transform.position = Vector3.Lerp(transform.position, _target.position, Time.deltaTime * positionDampening);
+        //transform.position = Vector3.Lerp(transform.position, _target.position, Time.deltaTime * positionDampening);
+        transform.position = _target.position;
     }
 }
