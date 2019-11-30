@@ -102,7 +102,7 @@ public class PlanePhysics : MonoBehaviour
         float liftMag = quadraticValue * _liftMax * (_horizontalVelocity.magnitude * _liftMultH + _liftMinH);
 
         //Debug.Log(transform.localEulerAngles.x + " | Angle01: " + angle01 + " | LiftMag: " + liftMag);
-        _lift = Vector3.Project(transform.up * liftMag, Vector3.up);
+        _lift = Mathf.Abs(transform.up.y) * liftMag * Vector3.up;
     }
 
     public float GetQuadraticCurveValue(float t, float pMid, float p1_1, float p1_2, float p1_3, float p2_1, float p2_2, float p2_3)
@@ -154,7 +154,7 @@ public class PlanePhysics : MonoBehaviour
     private void CalculateVerticalEffectOnHorizontal()
     {
         float mult = (transform.forward.y < 0 ? _VoHMultDown : _VoHMultUp);
-        float angleMult = GetQuadraticCurveValue(transform.forward.y, 0.5f, 0, 0.5f, 1, 1, 1.8f, 0);
+        float angleMult = GetQuadraticCurveValue(transform.forward.y, 0.5f, 0, 0.5f, 1, 1, 1.5f, 0);
         _verticalEffectOnHorizontal = angleMult * _verticalVelocity.y * mult;
 
     }

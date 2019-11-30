@@ -58,7 +58,11 @@ public class PlaneWheels : MonoBehaviour
 
     private Vector3 CalculateFriction()
     {
-        return coefficientOfFriction * physics._velocity;
+        Vector3 friction = coefficientOfFriction * physics._velocity;
+        if (friction.magnitude <= 0.002f) 
+            return physics._velocity;
+        else
+            return friction;
 
         // TODO Add Cut off at small enough number
     }

@@ -21,6 +21,7 @@ public class PlaneController : MonoBehaviour
     [Space]
     [SerializeField] private float maxThrust = 10;
     [SerializeField] private float minThrust = 0;
+    [SerializeField] private float thrustRampupSpeed = 1;
 
     void Start()
     {
@@ -39,10 +40,16 @@ public class PlaneController : MonoBehaviour
         //Quaternion rotation = transform.rotation;
 
         if (Input.GetButtonDown("Jump"))
-            physics.thrust = maxThrust;
+        {
+            StopCoroutine("rampupThrust");
+            StartCoroutine("rampupThrust", 1);
+        }
 
         if (Input.GetButtonUp("Jump"))
-            physics.thrust = minThrust;
+        {
+            StopCoroutine("rampupThrust");
+            StartCoroutine("rampupThrust", -1);
+        }
 
 
         //Rutter
@@ -72,5 +79,16 @@ public class PlaneController : MonoBehaviour
         dir = Quaternion.Euler(angles) * dir; // rotate it
         point = dir + pivot; // calculate rotated point
         return point; // return it
+    }
+
+    IEnumerator rampupThrust(int pDirection)
+    {
+        while (pDirection == 1 ? physics.thrust <= maxThrust : physics.thrust >= minThrust)
+        {
+            yield return null;
+            physics.thrust += thrustRampupSpeed * Time.deltaTime * pDirection;
+        }
+
+        physics.thrust = pDirection == 1 ? maxThrust : minThrust;
     }
 }

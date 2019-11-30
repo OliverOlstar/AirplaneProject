@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 720826033}
   - component: {fileID: 720826032}
   - component: {fileID: 720826035}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Wheel (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49,7 +49,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 720826030}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -106,10 +106,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   raycastDirection: {x: 0, y: -1, z: 0}
-  raycastLength: 0.5
+  raycastLength: 0.41
   raycastOffset: {x: 0, y: 0.3, z: 0}
   coefficientOfFriction: 0.4
-  bounciness: 0.6
+  bounciness: 0.1
+  bounceBuffer: 0.02
+  rotation: {x: -0.5, y: 0, z: 1}
+  rotationMult: 5
+  rotationMin: 5
 --- !u!1 &753522768
 GameObject:
   m_ObjectHideFlags: 0
@@ -123,7 +127,7 @@ GameObject:
   - component: {fileID: 753522771}
   - component: {fileID: 753522770}
   - component: {fileID: 753522773}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Wheel (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -159,7 +163,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 753522768}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -216,10 +220,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   raycastDirection: {x: 0, y: -1, z: 0}
-  raycastLength: 0.5
+  raycastLength: 0.41
   raycastOffset: {x: 0, y: 0.3, z: 0}
   coefficientOfFriction: 0.4
-  bounciness: 0.6
+  bounciness: 0.1
+  bounceBuffer: 0.02
+  rotation: {x: -0.5, y: 0, z: -1}
+  rotationMult: 5
+  rotationMin: 5
 --- !u!1 &1765538568
 GameObject:
   m_ObjectHideFlags: 0
@@ -233,7 +241,7 @@ GameObject:
   - component: {fileID: 1765538571}
   - component: {fileID: 1765538570}
   - component: {fileID: 1765538573}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -269,7 +277,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1765538568}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -326,10 +334,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   raycastDirection: {x: 0, y: -1, z: 0}
-  raycastLength: 0.5
+  raycastLength: 0.41
   raycastOffset: {x: 0, y: 0.3, z: 0}
   coefficientOfFriction: 0.4
-  bounciness: 0.6
+  bounciness: 0.1
+  bounceBuffer: 0.02
+  rotation: {x: 1, y: 0, z: 0}
+  rotationMult: 5
+  rotationMin: 5
 --- !u!1 &748107486956645740
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,7 +354,7 @@ GameObject:
   - component: {fileID: 748107486956645739}
   - component: {fileID: 748107486956645738}
   - component: {fileID: 748107486956645741}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Wings (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -378,7 +390,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 748107486956645740}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -434,7 +446,7 @@ GameObject:
   - component: {fileID: 748107487160456683}
   - component: {fileID: 748107487160456682}
   - component: {fileID: 748107487160456685}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Wings (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -470,7 +482,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 748107487160456687}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -527,7 +539,7 @@ GameObject:
   - component: {fileID: 748107487360155478}
   - component: {fileID: 748107487360155481}
   - component: {fileID: 748107487360155477}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Airplane CenterOfMass
   m_TagString: Untagged
   m_Icon: {fileID: 7422848464349959988, guid: 0000000000000000d000000000000000, type: 0}
@@ -565,6 +577,11 @@ MonoBehaviour:
   pitchSpeed: 45
   rollSpeed: 80
   TurnDampening: 10
+  speedNeededToPitch: 0.5
+  speedNeededToRoll: 0.5
+  maxThrust: 10
+  minThrust: 0
+  thrustRampupSpeed: 5
 --- !u!114 &748107487360155478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -643,7 +660,7 @@ GameObject:
   - component: {fileID: 748107487496970797}
   - component: {fileID: 748107487496970796}
   - component: {fileID: 748107487496970799}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Wings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -679,7 +696,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 748107487496970801}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -735,7 +752,7 @@ GameObject:
   - component: {fileID: 748107487558183201}
   - component: {fileID: 748107487558183200}
   - component: {fileID: 748107487558183203}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Airplane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -778,7 +795,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 748107487558183205}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -834,7 +851,7 @@ GameObject:
   - component: {fileID: 748107487731843005}
   - component: {fileID: 748107487731843004}
   - component: {fileID: 748107487731843007}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Wings (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -870,7 +887,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 748107487731843009}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
