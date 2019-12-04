@@ -86,7 +86,7 @@ public class PlaneController : MonoBehaviour
         while (pDirection == 1 ? physics.thrust <= maxThrust : physics.thrust >= minThrust)
         {
             yield return null;
-            physics.thrust += thrustRampupSpeed * Time.deltaTime * pDirection;
+            physics.thrust += thrustRampupSpeed * Time.deltaTime * pDirection * (physics._horizontalVelocity.magnitude + 4f) / 40;
         }
 
         physics.thrust = pDirection == 1 ? maxThrust : minThrust;
