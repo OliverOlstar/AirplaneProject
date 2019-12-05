@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlaneCrash : MonoBehaviour
 {
+    [SerializeField] private GameObject actualPlane;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +21,9 @@ public class PlaneCrash : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer != LayerMask.NameToLayer("IgnoreRaycast"))
-        GetComponent<PlaneVisuals>()._target = null;
+        {
+            GetComponent<PlaneVisuals>()._target = null;
+            Destroy(actualPlane);
+        }
     }
 }

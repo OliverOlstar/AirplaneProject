@@ -155,7 +155,6 @@ public class PlanePhysics : MonoBehaviour
     {
         float mult = (transform.forward.y < 0 ? _VoHMultDown : _VoHMultUp);
         float angleMult = GetQuadraticCurveValue(transform.forward.y, 0.5f, 0, 0.5f, 1, 1, 1.5f, 0);
-        Debug.Log(Vector3.Dot(transform.forward, _verticalVelocity));
 
         // TODO Make a thresh hold or porabla rather than instant
         if (transform.forward.y < 0.7f && transform.forward.y > -0.85f)
