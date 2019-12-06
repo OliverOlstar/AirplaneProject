@@ -14,7 +14,7 @@ public class CameraPivot : MonoBehaviour
         _camera = GetComponentInChildren<PlayerCamera>();
     }
 
-    void Update()
+    void LateUpdate()
     {
         //Position the camera pivot on the player
         if (target != null)

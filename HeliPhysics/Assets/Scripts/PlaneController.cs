@@ -23,6 +23,12 @@ public class PlaneController : MonoBehaviour
     [SerializeField] private float minThrust = 0;
     [SerializeField] private float thrustRampupSpeed = 1;
 
+    [HideInInspector] public float pitch;
+    [HideInInspector] public float yawn;
+    [HideInInspector] public float roll;
+    [HideInInspector] public bool thrust;
+    private bool thrusting = false;
+
     void Start()
     {
         physics = GetComponent<PlanePhysics>();
@@ -37,37 +43,30 @@ public class PlaneController : MonoBehaviour
 
     private void Rotation()
     {
-        //Quaternion rotation = transform.rotation;
-
-        if (Input.GetButtonDown("Jump"))
+        //Thrust
+        if (thrust != thrusting)
         {
             StopCoroutine("rampupThrust");
-            StartCoroutine("rampupThrust", 1);
+            StartCoroutine("rampupThrust", (thrust ? 1 : -1));
+            thrusting = thrust;
         }
-
-        if (Input.GetButtonUp("Jump"))
-        {
-            StopCoroutine("rampupThrust");
-            StartCoroutine("rampupThrust", -1);
-        }
-
 
         //Rutter
-        transform.Rotate(Vector3.up, Time.deltaTime * yawnSpeed * Input.GetAxis("Yawn") * Mathf.Min(physics._horizontalVelocity.magnitude, 1));
+        transform.Rotate(Vector3.up, Time.deltaTime * yawnSpeed * yawn * Mathf.Min(physics._horizontalVelocity.magnitude, 1));
 
         //Elevators
         if (physics._horizontalVelocity.magnitude > speedNeededToPitch / 5)
-            transform.Rotate(Vector3.right, Time.deltaTime * pitchSpeed * Input.GetAxis("Pitch") * Mathf.Min(physics._horizontalVelocity.magnitude / 5 - speedNeededToPitch / 5, 1));
+            transform.Rotate(Vector3.right, Time.deltaTime * pitchSpeed * pitch * Mathf.Min(physics._horizontalVelocity.magnitude / 5 - speedNeededToPitch / 5, 1));
 
         //Ailerons
         if (physics._horizontalVelocity.magnitude > speedNeededToRoll / 5)
-            transform.Rotate(Vector3.forward, Time.deltaTime * rollSpeed * -Input.GetAxis("Roll") * Mathf.Min(physics._horizontalVelocity.magnitude / 5 - speedNeededToRoll / 5, 1));
+            transform.Rotate(Vector3.forward, Time.deltaTime * rollSpeed * -roll * Mathf.Min(physics._horizontalVelocity.magnitude / 5 - speedNeededToRoll / 5, 1));
     }
 
     private void LerpRotation()
     {
-        _LocalRotation += Time.deltaTime * yawnSpeed * Input.GetAxis("Pitch") * Vector3.right;
-        _LocalRotation += Time.deltaTime * rollSpeed * -Input.GetAxis("Roll") * Vector3.forward;
+        _LocalRotation += Time.deltaTime * yawnSpeed * pitch * Vector3.right;
+        _LocalRotation += Time.deltaTime * rollSpeed * -roll * Vector3.forward;
 
         Quaternion TargetQ = Quaternion.Euler(_LocalRotation);
         transform.localRotation = Quaternion.Slerp(transform.localRotation, TargetQ, Time.deltaTime * TurnDampening);

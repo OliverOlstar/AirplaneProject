@@ -6,21 +6,9 @@ public class PlaneCrash : MonoBehaviour
 {
     [SerializeField] private GameObject actualPlane;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer != LayerMask.NameToLayer("IgnoreRaycast"))
+        if (other.gameObject.layer != LayerMask.NameToLayer("Ignore Raycast"))
         {
             GetComponent<PlaneVisuals>()._target = null;
             Destroy(actualPlane);
