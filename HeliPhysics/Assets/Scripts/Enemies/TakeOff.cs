@@ -9,6 +9,9 @@ public class TakeOff : MonoBehaviour, IState
     private PlanePhysics _physics;
 
     [SerializeField] private float pullUpSpeed;
+    [SerializeField] private float pullUpLength = 1.5f;
+    [SerializeField] [Range(0, -1)] private float pitchUpSpeed = -0.5f;
+    [SerializeField] [Range(0, 1)] private float pullUpTargetPitch = 0.2f;
     [SerializeField] private int _subState = 0;
     private float leaveStateTime = 0;
 
@@ -58,12 +61,11 @@ public class TakeOff : MonoBehaviour, IState
 
             case 1:
                 //Get off the ground
-                _controller.pitch = -0.5f;
+                _controller.pitch = pitchUpSpeed;
 
-                Debug.Log(transform.GetChild(0).forward.y);
-                if (transform.GetChild(0).forward.y >= 0.2f)
+                if (transform.GetChild(0).forward.y >= pullUpTargetPitch)
                 {
-                    leaveStateTime = Time.time + 1;
+                    leaveStateTime = Time.time + pullUpLength;
                     _controller.pitch = 0f;
                     _subState = 2;
                 }

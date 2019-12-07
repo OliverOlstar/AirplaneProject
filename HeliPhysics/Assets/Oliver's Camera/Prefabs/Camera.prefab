@@ -46,15 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   offSetUp: 0.6
-  runFunc: 1
-  DemoVarOffup: 0.3
-  DemoVarOffleft: 0
-  DemoVarSensi: 3
-  DemoVarDamp: 20
-  DemoVarDis: 6
-  DemoVarMiny: -8
-  DemoVarMaxy: 70
-  DemoVarTrnsSpd: 1
 --- !u!1 &5688443931472006255
 GameObject:
   m_ObjectHideFlags: 0
@@ -100,9 +91,10 @@ Camera:
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
-  m_GateFitMode: 2
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
@@ -112,7 +104,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 80
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -150,16 +142,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b60d3a0c3e72974f90c65fe0e878dec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lockOnTarget: {fileID: 0}
   cameraCollisionLayers:
     serializedVersion: 2
     m_Bits: 1
   cameraCollisionDampening: 15
-  cameraCollisionMinDisPercent: 0.1
+  cameraCollisionMinDisPercent: 0.3
   MouseSensitivity: 5
   TurnDampening: 20
   OffSetLeft: 0
-  CameraDistance: 2
-  CameraMinHeight: -8
+  CameraDistance: 8
+  CameraMinHeight: -10
   CameraMaxHeight: 70
   CameraDisabled: 0

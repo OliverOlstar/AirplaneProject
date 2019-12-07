@@ -21,7 +21,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 2}
-  m_MinSize: {x: 950, y: 300}
+  m_MinSize: {x: 950, y: 544}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -111,10 +111,10 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 947
-  m_MinSize: {x: 683, y: 494}
-  m_MaxSize: {x: 14004, y: 14044}
+  m_MinSize: {x: 679, y: 494}
+  m_MaxSize: {x: 14002, y: 14044}
   vertical: 0
-  controlID: 12888
+  controlID: 37
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -136,10 +136,10 @@ MonoBehaviour:
     y: 0
     width: 1369
     height: 947
-  m_MinSize: {x: 406, y: 494}
+  m_MinSize: {x: 404, y: 494}
   m_MaxSize: {x: 10002, y: 14044}
   vertical: 1
-  controlID: 12830
+  controlID: 38
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -161,10 +161,10 @@ MonoBehaviour:
     y: 0
     width: 1369
     height: 622
-  m_MinSize: {x: 406, y: 222}
-  m_MaxSize: {x: 8006, y: 4022}
+  m_MinSize: {x: 404, y: 222}
+  m_MaxSize: {x: 8004, y: 4022}
   vertical: 0
-  controlID: 12831
+  controlID: 88
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -184,8 +184,8 @@ MonoBehaviour:
     y: 0
     width: 401
     height: 622
-  m_MinSize: {x: 202, y: 222}
-  m_MaxSize: {x: 4002, y: 4022}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 13}
@@ -210,8 +210,8 @@ MonoBehaviour:
     y: 0
     width: 968
     height: 622
-  m_MinSize: {x: 204, y: 222}
-  m_MaxSize: {x: 4004, y: 4022}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -266,8 +266,8 @@ MonoBehaviour:
     y: 0
     width: 551
     height: 947
-  m_MinSize: {x: 277, y: 72}
-  m_MaxSize: {x: 4002, y: 4022}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 19}
   m_Panes:
   - {fileID: 19}
@@ -384,20 +384,20 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 6ae1ffff
-      m_LastClickedID: -7830
-      m_ExpandedIDs: 6ae1ffff4afbffff6efbffff7e310000
+      m_SelectedIDs: f6f2ffff
+      m_LastClickedID: -3338
+      m_ExpandedIDs: 06deffffe6f2fffff6f2fffff8f2ffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: Airplane AI
-        m_OriginalName: Airplane AI
+        m_Name: Airplane Player
+        m_OriginalName: Airplane Player
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: -7830
+        m_UserData: -8698
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
         m_OriginalEventType: 0
@@ -446,9 +446,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 427.66513, y: 21.587973, z: 857.80444}
+    m_Target: {x: 450.20224, y: 50.696472, z: 904.0058}
     speed: 2
-    m_Value: {x: 427.66513, y: 21.587973, z: 857.80444}
+    m_Value: {x: 450.20224, y: 50.696472, z: 904.0058}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -477,13 +477,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: 0.18586037, y: -0.2578842, z: 0.050566833, w: 0.94688743}
+    m_Target: {x: -0.002823735, y: -0.9959681, z: 0.03469, w: -0.0839579}
     speed: 2
-    m_Value: {x: 0.18449639, y: -0.25651297, z: 0.049898077, w: 0.9474558}
+    m_Value: {x: -0.0028234348, y: -0.9958622, z: 0.034686312, w: -0.08394898}
   m_Size:
-    m_Target: 10.777128
+    m_Target: 10.425324
     speed: 2
-    m_Value: 10.777128
+    m_Value: 10.425324
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -638,20 +638,20 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/Enemies
+    - Assets/Prefabs
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts/Enemies
+  - Assets/Prefabs
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: D:\GitHub\AirplaneProject\HeliPhysics
+  m_LastProjectPath: C:\Users\Oliver.Loescher\Desktop\AirplaneProject\HeliPhysics
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: aa320000
-    m_LastClickedID: 12970
-    m_ExpandedIDs: 00000000b02c0000502d0000d62d00005c2e0000
+    m_SelectedIDs: 32350000
+    m_LastClickedID: 13618
+    m_ExpandedIDs: 00000000d033000044340000ac3400001435000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -679,7 +679,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000b02c0000d62d00005c2e0000
+    m_ExpandedIDs: 00000000d033000044340000ac34000014350000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -797,7 +797,7 @@ MonoBehaviour:
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_PreviewWindow: {fileID: 0}
-  m_LastInspectedObjectInstanceID: -1
+  m_LastInspectedObjectInstanceID: -3338
   m_LastVerticalScrollValue: 0
 --- !u!114 &20
 MonoBehaviour:
