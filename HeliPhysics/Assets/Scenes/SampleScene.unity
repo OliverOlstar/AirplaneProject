@@ -1041,40 +1041,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 9171022614361251193, guid: 12f8fc60d8a10a74db2b0d15d9240c25,
+    - target: {fileID: 8441939990070183874, guid: 12f8fc60d8a10a74db2b0d15d9240c25,
         type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9171022614361251190, guid: 12f8fc60d8a10a74db2b0d15d9240c25,
-        type: 3}
-      propertyPath: thrustRampupSpeed
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 9171022614361251191, guid: 12f8fc60d8a10a74db2b0d15d9240c25,
-        type: 3}
-      propertyPath: _verticalVelocity.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9171022614361251191, guid: 12f8fc60d8a10a74db2b0d15d9240c25,
-        type: 3}
-      propertyPath: _liftMax
-      value: 10
+      propertyPath: m_Name
+      value: Airplane Player
       objectReference: {fileID: 0}
     - target: {fileID: 8441939990070183872, guid: 12f8fc60d8a10a74db2b0d15d9240c25,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 424.1349
+      value: 445.86
       objectReference: {fileID: 0}
     - target: {fileID: 8441939990070183872, guid: 12f8fc60d8a10a74db2b0d15d9240c25,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.577476
+      value: 9.46
       objectReference: {fileID: 0}
     - target: {fileID: 8441939990070183872, guid: 12f8fc60d8a10a74db2b0d15d9240c25,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 970.49176
+      value: 962.72
       objectReference: {fileID: 0}
     - target: {fileID: 8441939990070183872, guid: 12f8fc60d8a10a74db2b0d15d9240c25,
         type: 3}
@@ -1116,10 +1101,40 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8441939990070183874, guid: 12f8fc60d8a10a74db2b0d15d9240c25,
+    - target: {fileID: 8441939990334409874, guid: 12f8fc60d8a10a74db2b0d15d9240c25,
         type: 3}
-      propertyPath: m_Name
-      value: Airplane Player
+      propertyPath: rotation.x
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8441939990334409874, guid: 12f8fc60d8a10a74db2b0d15d9240c25,
+        type: 3}
+      propertyPath: rotationMult
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8441939990368434804, guid: 12f8fc60d8a10a74db2b0d15d9240c25,
+        type: 3}
+      propertyPath: rotation.x
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8441939990368434804, guid: 12f8fc60d8a10a74db2b0d15d9240c25,
+        type: 3}
+      propertyPath: rotationMult
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8441939991369685292, guid: 12f8fc60d8a10a74db2b0d15d9240c25,
+        type: 3}
+      propertyPath: Debugs
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8441939991369685292, guid: 12f8fc60d8a10a74db2b0d15d9240c25,
+        type: 3}
+      propertyPath: rotationMult
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8441939991369685292, guid: 12f8fc60d8a10a74db2b0d15d9240c25,
+        type: 3}
+      propertyPath: rotation.x
+      value: 0.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f8fc60d8a10a74db2b0d15d9240c25, type: 3}
@@ -1308,5 +1323,10 @@ PrefabInstance:
       propertyPath: actualPlane
       value: 
       objectReference: {fileID: 2022285436}
+    - target: {fileID: 1125627143601939699, guid: dc513e6943c248241accca13310e3ee3,
+        type: 3}
+      propertyPath: Debugs
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc513e6943c248241accca13310e3ee3, type: 3}

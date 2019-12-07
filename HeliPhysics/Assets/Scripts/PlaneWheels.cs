@@ -7,17 +7,19 @@ public class PlaneWheels : MonoBehaviour
     private PlanePhysics physics;
     [SerializeField] private Vector3 raycastDirection;
     [SerializeField] private float raycastLength;
-    [SerializeField] private Vector3 raycastOffset;
+    [SerializeField] private Vector3 raycastStartOffset;
+    [SerializeField] [Range(0, 0.5f)] private float raycastExtraLength;
+    [SerializeField] private float raycastExtraMult;
+    [SerializeField] private float raycastMult;
 
     [SerializeField] private float coefficientOfFriction = 0.4f;
     [SerializeField] [Range(0, 1)] private float bounciness;
 
-    [SerializeField] private float bounceBuffer;
-
     [Space]
     [SerializeField] private Vector3 rotation;
     [SerializeField] private float rotationMult;
-    [SerializeField] private float rotationMin = 5;
+
+    [SerializeField] private bool Debugs = false;
 
     void Start()
     {
@@ -27,33 +29,34 @@ public class PlaneWheels : MonoBehaviour
     public void CheckWithWheel()
     {
         RaycastHit hit;
-
-        if (Physics.Raycast(transform.position + raycastOffset, raycastDirection.normalized, out hit, raycastLength))
+        if (Physics.Raycast(transform.position + raycastStartOffset, raycastDirection.normalized, out hit, raycastLength))
         {
             //Normal Force
-            physics._velocity += CalculateNormal(hit);
+            Vector3 normalForce = CalculateNormal(hit);
 
             //Friction
-            Vector3 normalForce = CalculateFriction();
+            //normalForce += CalculateFriction();
 
-            physics._angluarVelocity += rotation * normalForce.magnitude * Mathf.Max(rotationMin, physics._horizontalVelocity.magnitude) * Time.deltaTime * rotationMult;
-            physics._velocity -= normalForce * Time.deltaTime;
-
-            if (physics._velocity.y < bounceBuffer)
-                physics._velocity.y = Mathf.Epsilon;
+            physics._angluarVelocity += rotation * normalForce.magnitude * Time.deltaTime * rotationMult;
+            if (Debugs) Debug.Log(normalForce.magnitude * Time.deltaTime * rotationMult);
+            physics._velocity += normalForce;
         }
     }
 
     private Vector3 CalculateNormal(RaycastHit pHit)
     {
-        float normalMult = bounciness + 1 + Mathf.Pow(raycastLength - pHit.distance, 3);
-        //if (normalMult <= bounceBuffer) normalMult -= bounciness;
+        float normalMult = bounciness + -pHit.distance + raycastExtraLength;
+        if (normalMult < 0)
+        {
+            normalMult = (normalMult + 1) * raycastExtraMult;
+        }
+        else
+        {
+            normalMult = (normalMult * raycastMult) + 1;
+        }
 
         Vector3 normalForce = Vector3.Project(physics._velocity, pHit.normal) * normalMult;
-        if (Vector3.Dot(pHit.normal, normalForce) < 0)
-            return -normalForce;
-
-        return Vector3.zero;
+        return -normalForce;
     }
 
     private Vector3 CalculateFriction()
@@ -70,6 +73,7 @@ public class PlaneWheels : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawLine(transform.position + raycastOffset, transform.position + raycastOffset + raycastDirection.normalized * raycastLength);
+        Gizmos.DrawLine(transform.position + raycastStartOffset, transform.position + raycastStartOffset + (raycastDirection.normalized * raycastLength));
+        Gizmos.DrawSphere(transform.position + raycastStartOffset + (raycastDirection.normalized * raycastExtraLength), 0.03f);
     }
 }
