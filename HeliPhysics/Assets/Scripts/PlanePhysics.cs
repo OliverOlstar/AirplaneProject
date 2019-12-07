@@ -43,6 +43,8 @@ public class PlanePhysics : MonoBehaviour
 
     void Update()
     {
+        if (Time.deltaTime >= 0.5f) return;
+
         _horizontalVelocity += transform.forward * thrust * Time.deltaTime;
         _horizontalVelocity.y = 0;
 

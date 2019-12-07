@@ -9,7 +9,7 @@ public class PlayerInput : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _plane = GetComponent<PlaneController>();
+        _plane = GetComponentInChildren<PlaneController>();
     }
 
     // Update is called once per frame

@@ -11,7 +11,7 @@ public class PlaneCrash : MonoBehaviour
         if (other.gameObject.layer != LayerMask.NameToLayer("Ignore Raycast"))
         {
             GetComponent<PlaneVisuals>()._target = null;
-            Destroy(actualPlane);
+            actualPlane.SetActive(false);
         }
     }
 }
