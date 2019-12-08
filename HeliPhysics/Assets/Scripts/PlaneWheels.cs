@@ -15,6 +15,7 @@ public class PlaneWheels : MonoBehaviour
 
     [SerializeField] private float coefficientOfFriction = 0.4f;
     [SerializeField] private float maxFriction = 0.4f;
+    [SerializeField] private float liftInfluenceReduction = 0.4f;
     [SerializeField] [Range(0, 1)] private float bounciness;
 
     [Space]
@@ -42,7 +43,6 @@ public class PlaneWheels : MonoBehaviour
             normalForce += CalculateFriction() * Time.deltaTime;
 
             physics._angluarVelocity += rotation * normalForce.magnitude * Time.deltaTime * rotationMult;
-            if (Debugs) Debug.Log(normalForce.magnitude * Time.deltaTime * rotationMult);
             physics._velocity += normalForce;
         }
     }
@@ -65,7 +65,8 @@ public class PlaneWheels : MonoBehaviour
 
     private Vector3 CalculateFriction()
     {
-        Vector3 friction = Vector3.Min(coefficientOfFriction * physics._velocity, maxFriction * physics._velocity.normalized);
+        float liftInfluence = Mathf.Max(0, physics._lift.y - liftInfluenceReduction);
+        Vector3 friction = Vector3.Min(coefficientOfFriction * (physics._velocity - liftInfluence * Vector3.up), maxFriction * physics._velocity.normalized);
         if (friction.magnitude <= 0.005f) 
             return -physics._velocity;
         else

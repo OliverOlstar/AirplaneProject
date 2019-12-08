@@ -60,6 +60,7 @@ MonoBehaviour:
   raycastMult: 6
   coefficientOfFriction: 0.4
   maxFriction: 0.01
+  liftInfluenceReduction: 4.5
   bounciness: 0
   rotation: {x: -0.5, y: 0, z: 1}
   rotationMult: 120
@@ -124,6 +125,7 @@ MonoBehaviour:
   raycastMult: 6
   coefficientOfFriction: 0.4
   maxFriction: 0.01
+  liftInfluenceReduction: 4.5
   bounciness: 0
   rotation: {x: -0.5, y: 0, z: -1}
   rotationMult: 120
@@ -188,8 +190,9 @@ MonoBehaviour:
   raycastMult: 6
   coefficientOfFriction: 0.01
   maxFriction: 0.4
+  liftInfluenceReduction: 4.5
   bounciness: 0
-  rotation: {x: 0.8, y: 0, z: 0}
+  rotation: {x: 1, y: 0, z: 0}
   rotationMult: 120
   Debugs: 0
 --- !u!1 &748107487360155480
