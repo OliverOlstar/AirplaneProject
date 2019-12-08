@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 720826030}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 2, y: -0.64, z: 0.18}
+  m_LocalPosition: {x: 2.2, y: -0.91, z: 0.18}
   m_LocalScale: {x: 0.09246519, y: 0.3104458, z: 0.14653483}
   m_Children: []
   m_Father: {fileID: 748107487558183198}
@@ -52,16 +52,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef6385d7d7b256442b34d9737d1aad05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  raycastDirection: {x: 0, y: -1, z: 0}
-  raycastLength: 0.41
-  raycastStartOffset: {x: 0, y: 0, z: 0}
-  raycastExtraLength: 0
+  raycastDirection: {x: -0.25, y: -1, z: 0}
+  raycastLength: 2
+  raycastStartOffset: {x: 0, y: 0.5, z: 0.17}
+  raycastExtraLength: 0.72
+  raycastExtraMult: 0.22
+  raycastMult: 6
   coefficientOfFriction: 0.4
-  bounciness: 0.1
-  bounceBuffer: 0.02
+  maxFriction: 0.01
+  bounciness: 0
   rotation: {x: -0.5, y: 0, z: 1}
-  rotationMult: 5
-  rotationMin: 5
+  rotationMult: 120
   Debugs: 0
 --- !u!1 &753522768
 GameObject:
@@ -89,7 +90,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 753522768}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -2, y: -0.64, z: 0.18}
+  m_LocalPosition: {x: -2.1999943, y: -0.91000307, z: 0.18001007}
   m_LocalScale: {x: 0.09246519, y: 0.31044582, z: 0.14653483}
   m_Children: []
   m_Father: {fileID: 748107487558183198}
@@ -115,16 +116,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef6385d7d7b256442b34d9737d1aad05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  raycastDirection: {x: 0, y: -1, z: 0}
-  raycastLength: 0.41
-  raycastStartOffset: {x: 0, y: 0, z: 0}
-  raycastExtraLength: 0
+  raycastDirection: {x: -0.25, y: -1, z: 0}
+  raycastLength: 2
+  raycastStartOffset: {x: 0, y: 0.5, z: 0.17}
+  raycastExtraLength: 0.72
+  raycastExtraMult: 0.22
+  raycastMult: 6
   coefficientOfFriction: 0.4
-  bounciness: 0.1
-  bounceBuffer: 0.02
+  maxFriction: 0.01
+  bounciness: 0
   rotation: {x: -0.5, y: 0, z: -1}
-  rotationMult: 5
-  rotationMin: 5
+  rotationMult: 120
   Debugs: 0
 --- !u!1 &1765538568
 GameObject:
@@ -152,7 +154,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1765538568}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -0.6, z: -0.35}
+  m_LocalPosition: {x: -0, y: -0.78, z: -0.42}
   m_LocalScale: {x: 0.09246519, y: 0.27541324, z: 0.14653483}
   m_Children: []
   m_Father: {fileID: 748107487558183198}
@@ -178,16 +180,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef6385d7d7b256442b34d9737d1aad05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  raycastDirection: {x: 0, y: -1, z: 0}
-  raycastLength: 0.41
-  raycastStartOffset: {x: 0, y: 0, z: 0}
-  raycastExtraLength: 0
-  coefficientOfFriction: 0.4
-  bounciness: 0.1
-  bounceBuffer: 0.02
-  rotation: {x: 1, y: 0, z: 0}
-  rotationMult: 5
-  rotationMin: 5
+  raycastDirection: {x: -0.25, y: -1, z: 0}
+  raycastLength: 2
+  raycastStartOffset: {x: 0, y: 0.5, z: 0.13}
+  raycastExtraLength: 0.612
+  raycastExtraMult: 0.22
+  raycastMult: 6
+  coefficientOfFriction: 0.01
+  maxFriction: 0.4
+  bounciness: 0
+  rotation: {x: 0.8, y: 0, z: 0}
+  rotationMult: 120
   Debugs: 0
 --- !u!1 &748107487360155480
 GameObject:
@@ -244,7 +247,7 @@ MonoBehaviour:
   speedNeededToRoll: 0.5
   maxThrust: 10
   minThrust: 0
-  thrustRampupSpeed: 5
+  thrustRampupSpeed: 7
   pitch: 0
   yawn: 0
   roll: 0
@@ -279,7 +282,7 @@ MonoBehaviour:
   _dragHDefault: 0
   _liftMultH: 0.085
   _liftMinH: 0.1
-  _liftMax: 13
+  _liftMax: 10
   _VoHMultDown: 1
   _VoHMultUp: -2
   _AngluarInfluence: 1.7
