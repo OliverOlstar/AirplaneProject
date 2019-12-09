@@ -30,6 +30,10 @@ public class PlanePhysics : MonoBehaviour
     [SerializeField] private float _liftMax;
     [SerializeField] private float _VoHMultDown;
     [SerializeField] private float _VoHMultUp;
+    [SerializeField] private float _turbulanceStartValue;
+    [SerializeField] private Vector3 _turbulanceTrigger;
+    [SerializeField] private Vector3 _turbulanceMult;
+    //[SerializeField] private float _turbulanceStartValue;
 
     [SerializeField] private float _AngluarInfluence;
     //[SerializeField] private float _mass;
@@ -70,6 +74,8 @@ public class PlanePhysics : MonoBehaviour
         //Calculate Angular;
         _angluarVelocity = Vector3.Project(-transform.right, Vector3.up) * Time.deltaTime * _AngluarInfluence * _horizontalVelocity.magnitude;
 
+        _angluarVelocity += CalculateTurbulance();
+
         _velocity = _verticalVelocity + _horizontalVelocity;
         //TODO Check with wheels
 
@@ -77,9 +83,24 @@ public class PlanePhysics : MonoBehaviour
         _verticalVelocity.y = _velocity.y;
         _horizontalVelocity = new Vector3(_velocity.x, 0, _velocity.z);
 
+        if (_velocity.magnitude > 0.08f)
+            transform.position += _velocity * Time.deltaTime * 5;
 
-        transform.position += _velocity * Time.deltaTime * 5;
-        transform.localEulerAngles += _angluarVelocity;
+        if (_angluarVelocity.magnitude > 0.14f)
+            transform.localEulerAngles += _angluarVelocity;
+    }
+
+    private Vector3 CalculateTurbulance()
+    {
+        if (_velocity.magnitude < _turbulanceStartValue)
+            return Vector3.zero;
+        else
+        {
+            float tX = Random.value < _turbulanceTrigger.x ? 0 : (Random.value - 0.5f) * _velocity.magnitude * _turbulanceMult.x;
+            float tY = Random.value < _turbulanceTrigger.y ? 0 : (Random.value - 0.5f) * _velocity.magnitude * _turbulanceMult.y;
+            float tZ = Random.value < _turbulanceTrigger.z ? 0 : (Random.value - 0.5f) * _velocity.magnitude * _turbulanceMult.z;
+            return new Vector3(tX, tY, tZ);
+        }
     }
 
     private void CalculateWheelsForces()

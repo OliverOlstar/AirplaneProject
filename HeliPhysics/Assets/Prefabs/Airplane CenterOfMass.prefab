@@ -288,6 +288,9 @@ MonoBehaviour:
   _liftMax: 10
   _VoHMultDown: 1
   _VoHMultUp: -2
+  _turbulanceStartValue: 6
+  _turbulanceTrigger: {x: 0.7, y: 0.6, z: 0.5}
+  _turbulanceMult: {x: 0.05, y: 0.03, z: 0.05}
   _AngluarInfluence: 1.7
   _bestLiftAngle: 0.65
 --- !u!54 &748107487360155481
