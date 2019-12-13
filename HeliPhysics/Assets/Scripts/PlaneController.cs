@@ -26,7 +26,7 @@ public class PlaneController : MonoBehaviour
     [HideInInspector] public float pitch;
     [HideInInspector] public float yawn;
     [HideInInspector] public float roll;
-    [HideInInspector] public bool thrust;
+    public bool thrust;
     private bool thrusting = false;
 
     void Start()
