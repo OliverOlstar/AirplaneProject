@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraPivot : MonoBehaviour
 {
-    public GameObject target;
+    //public GameObject target;
     private PlayerCamera _camera;
     public float offSetUp = 0.6f;
 
@@ -14,11 +14,10 @@ public class CameraPivot : MonoBehaviour
         _camera = GetComponentInChildren<PlayerCamera>();
     }
 
-    void LateUpdate()
+    public void tick(Vector3 pPosition)
     {
         //Position the camera pivot on the player
-        if (target != null)
-            transform.position = target.transform.position + (Vector3.up * offSetUp);
+        transform.position = pPosition + (Vector3.up * offSetUp);
     }
 
 

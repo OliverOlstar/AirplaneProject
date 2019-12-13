@@ -51,15 +51,15 @@ public class PlaneController : MonoBehaviour
             thrusting = thrust;
         }
 
-        //Rutter
+        //Rutter - Yawn
         transform.Rotate(Vector3.up, Time.deltaTime * yawnSpeed * yawn * Mathf.Min(physics._horizontalVelocity.magnitude, 1));
 
-        //Elevators
-        if (physics._horizontalVelocity.magnitude > speedNeededToPitch / 5)
+        //Elevators - Pitch
+        if (physics._horizontalVelocity.magnitude > speedNeededToPitch)
             transform.Rotate(Vector3.right, Time.deltaTime * pitchSpeed * pitch * Mathf.Min(physics._horizontalVelocity.magnitude / 5 - speedNeededToPitch / 5, 1));
 
-        //Ailerons
-        if (physics._horizontalVelocity.magnitude > speedNeededToRoll / 5)
+        //Ailerons - Roll
+        if (physics._horizontalVelocity.magnitude > speedNeededToRoll)
             transform.Rotate(Vector3.forward, Time.deltaTime * rollSpeed * -roll * Mathf.Min(physics._horizontalVelocity.magnitude / 5 - speedNeededToRoll / 5, 1));
     }
 
