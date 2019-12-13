@@ -53,7 +53,7 @@ MonoBehaviour:
   pitchUpSpeed: -0.2
   pullUpTargetPitch: 0.35
   _subState: 0
-  parallelRotMult: 0.6
+  parallelRotMult: 0.9
   returnToStripRotMult: 1
   returnToStripMinRot: 24
 --- !u!114 &5968513233504644982
@@ -70,6 +70,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pitchMult: 0.05
   _subState: 0
+  pointB: {fileID: 0}
+  yawnSpeed: 1
+  rollSpeed: 0.1
 --- !u!114 &6903360032841381363
 MonoBehaviour:
   m_ObjectHideFlags: 0

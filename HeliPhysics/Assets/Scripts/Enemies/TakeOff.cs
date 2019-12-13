@@ -60,45 +60,7 @@ public class TakeOff : MonoBehaviour, IState
         {
             case 0:
                 //Acceleration
-                float relRotY = (transform.GetChild(0).eulerAngles.y - pointA.transform.eulerAngles.y + 180);
-
-                //Rotate to be parallel to the landing strip
-                if (relRotY < 0)
-                {
-                    _controller.yawn = -Vector3.Dot(transform.GetChild(0).forward, pointA.transform.forward) * parallelRotMult;
-                } 
-                else if (relRotY != 0)
-                {
-                    _controller.yawn = Vector3.Dot(transform.GetChild(0).forward, pointA.transform.forward) * parallelRotMult;
-                }
-
-                //If outside of runway turn onto runway
-                Vector3 directionBetween = transform.GetChild(0).position - pointA.transform.position;
-                float disFromPointA = Vector3.Project(directionBetween, pointA.transform.right).magnitude - (pointA.stripWidth / 2);
-                disFromPointA = Mathf.Min(disFromPointA, 10);
-
-                if (disFromPointA > -2)
-                {
-                    float dotRight = Vector3.Dot(directionBetween.normalized, pointA.transform.right);
-                    float dotLeft = Vector3.Dot(directionBetween.normalized, -pointA.transform.right);
-
-                    Debug.Log(relRotY);
-                    if (dotRight > dotLeft)
-                    {
-                        if (relRotY < returnToStripMinRot)
-                            _controller.yawn = disFromPointA / 8 * returnToStripRotMult;
-                        else 
-                            _controller.yawn = 0;
-                    }
-                    else
-                    {
-                        if (relRotY > -returnToStripMinRot)
-                            _controller.yawn = -disFromPointA / 8 * returnToStripRotMult;
-                        else
-                            _controller.yawn = 0;
-                    }
-                }
-
+                StayOnLandingStrip();
 
                 if (_physics._horizontalVelocity.magnitude >= pullUpSpeed)
                 {
@@ -126,6 +88,48 @@ public class TakeOff : MonoBehaviour, IState
                     _subState = 3;
 
                 break;
+        }
+    }
+
+    private void StayOnLandingStrip()
+    {
+        //Rotate to be parallel to the landing strip
+        float relRotY = transform.GetChild(0).eulerAngles.y - pointA.transform.eulerAngles.y + 180;
+
+        if (relRotY < 0)
+        {
+            _controller.yawn = -Vector3.Dot(transform.GetChild(0).forward, pointA.transform.forward) * parallelRotMult;
+        }
+        else if (relRotY != 0)
+        {
+            _controller.yawn = Vector3.Dot(transform.GetChild(0).forward, pointA.transform.forward) * parallelRotMult;
+        }
+
+        //If outside of runway turn onto runway
+        Vector3 directionBetween = transform.GetChild(0).position - pointA.transform.position;
+        float disFromPointA = Vector3.Project(directionBetween, pointA.transform.right).magnitude - (pointA.stripWidth / 2);
+        disFromPointA = Mathf.Min(disFromPointA, 10);
+
+        if (disFromPointA > -2)
+        {
+            float dotRight = Vector3.Dot(directionBetween.normalized, pointA.transform.right);
+            float dotLeft = Vector3.Dot(directionBetween.normalized, -pointA.transform.right);
+
+            Debug.Log(relRotY);
+            if (dotRight > dotLeft)
+            {
+                if (relRotY < returnToStripMinRot)
+                    _controller.yawn = disFromPointA / 8 * returnToStripRotMult;
+                else
+                    _controller.yawn = 0;
+            }
+            else
+            {
+                if (relRotY > -returnToStripMinRot)
+                    _controller.yawn = -disFromPointA / 8 * returnToStripRotMult;
+                else
+                    _controller.yawn = 0;
+            }
         }
     }
 }
