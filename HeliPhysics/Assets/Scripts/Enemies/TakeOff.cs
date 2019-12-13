@@ -10,13 +10,18 @@ public class TakeOff : MonoBehaviour, IState
 
     [SerializeField] private LandingStrip pointA;
 
-    [Space]
+    [Header("Pitch")]
     [SerializeField] private float pullUpSpeed;
     [SerializeField] private float pullUpLength = 1.5f;
     [SerializeField] [Range(0, -1)] private float pitchUpSpeed = -0.5f;
     [SerializeField] [Range(0, 1)] private float pullUpTargetPitch = 0.2f;
     [SerializeField] private int _subState = 0;
     private float leaveStateTime = 0;
+
+    [Header("Yawn")]
+    [SerializeField] private float parallelRotMult = 1;
+    [SerializeField] private float returnToStripRotMult = 1;
+    [SerializeField] private float returnToStripMinRot = 20;
 
     private bool _enabled = false;
 
@@ -55,42 +60,42 @@ public class TakeOff : MonoBehaviour, IState
         {
             case 0:
                 //Acceleration
-
-                float pointARotY = pointA.transform.eulerAngles.y % 180;
-                float myRotY = transform.GetChild(0).eulerAngles.y % 180;
+                float relRotY = (transform.GetChild(0).eulerAngles.y - pointA.transform.eulerAngles.y + 180);
 
                 //Rotate to be parallel to the landing strip
-                if (myRotY < pointARotY)
+                if (relRotY < 0)
                 {
-                    Debug.Log("myRotY: " + myRotY + " | pointARotY: " + pointARotY);
-                    _controller.yawn = -Vector3.Dot(transform.GetChild(0).forward, pointA.transform.forward);
+                    _controller.yawn = -Vector3.Dot(transform.GetChild(0).forward, pointA.transform.forward) * parallelRotMult;
                 } 
-                else if (myRotY > pointARotY)
+                else if (relRotY != 0)
                 {
-                    Debug.Log("myRotY: " + myRotY + " | pointARotY: " + pointARotY);
-                    _controller.yawn = Vector3.Dot(transform.GetChild(0).forward, pointA.transform.forward);
+                    _controller.yawn = Vector3.Dot(transform.GetChild(0).forward, pointA.transform.forward) * parallelRotMult;
                 }
 
                 //If outside of runway turn onto runway
                 Vector3 directionBetween = transform.GetChild(0).position - pointA.transform.position;
                 float disFromPointA = Vector3.Project(directionBetween, pointA.transform.right).magnitude - (pointA.stripWidth / 2);
-                disFromPointA = Mathf.Min(disFromPointA, 5);
+                disFromPointA = Mathf.Min(disFromPointA, 10);
 
                 if (disFromPointA > -2)
                 {
                     float dotRight = Vector3.Dot(directionBetween.normalized, pointA.transform.right);
                     float dotLeft = Vector3.Dot(directionBetween.normalized, -pointA.transform.right);
-                    Debug.Log("Rot Right: " + dotRight + " | Rot Left: " + dotLeft);
 
+                    Debug.Log(relRotY);
                     if (dotRight > dotLeft)
                     {
-                        if (dotRight > 0.1f)
-                            _controller.yawn = disFromPointA / 4;
+                        if (relRotY < returnToStripMinRot)
+                            _controller.yawn = disFromPointA / 8 * returnToStripRotMult;
+                        else 
+                            _controller.yawn = 0;
                     }
                     else
                     {
-                        if (dotLeft > 0.1f)
-                            _controller.yawn = -disFromPointA / 4;
+                        if (relRotY > -returnToStripMinRot)
+                            _controller.yawn = -disFromPointA / 8 * returnToStripRotMult;
+                        else
+                            _controller.yawn = 0;
                     }
                 }
 
