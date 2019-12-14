@@ -14,8 +14,12 @@ public class FlyToTarget : MonoBehaviour, IState
     [SerializeField] private LandingStrip pointB;
     [SerializeField] private float yawnSpeed;
     [SerializeField] private float rollSpeed = 1;
+    [SerializeField] private float rollSpeedParallel = 1;
 
     [SerializeField] private float targetPitch = 0;
+    [SerializeField] [Range(-0.5f, 0.5f)] private float targetRoll = 0;
+    [SerializeField] private float returnToStripMinRot = 20;
+    [SerializeField] private float rollClamp = 0.25f;
 
     private bool _enabled = false;
 
@@ -52,14 +56,12 @@ public class FlyToTarget : MonoBehaviour, IState
         if (Vector3.Distance(transform.GetChild(0).position, pointB.transform.position) < 1000)
         {
             _controller.thrust = false;
-
         }
         else
         {
-            LevelOut();
         }
-        
 
+        LevelOut();
         StayOnLandingStrip();
     }
 
@@ -91,8 +93,8 @@ public class FlyToTarget : MonoBehaviour, IState
     private void LevelOut()
     {
         _controller.pitch = (_physics._verticalVelocity.y - targetPitch) * pitchMult;
-
-        _controller.roll = -_physics._angluarVelocity.y;
+        Debug.Log(-_physics._angluarVelocity.y + targetRoll);
+        _controller.roll = -_physics._angluarVelocity.y + targetRoll;
         _controller.yawn = 0;
     }
 
@@ -104,40 +106,44 @@ public class FlyToTarget : MonoBehaviour, IState
         //If outside of runway turn onto runway
         Vector3 directionBetween = transform.GetChild(0).position - pointB.transform.position;
         float disFromPointA = Vector3.Project(directionBetween, pointB.transform.right).magnitude - (pointB.stripWidth / 2);
-        disFromPointA = Mathf.Min(disFromPointA, 10);
+        disFromPointA = Mathf.Min(disFromPointA, 500);
 
         if (disFromPointA > -2)
         {
             float dotRight = Vector3.Dot(directionBetween.normalized, pointB.transform.right);
             float dotLeft = Vector3.Dot(directionBetween.normalized, -pointB.transform.right);
 
+            //Debug.Log(disFromPointA / (500 * rollSpeed));
             Debug.Log(relRotY);
             if (dotRight > dotLeft)
             {
-                if (relRotY < 24)
-                    _controller.yawn = disFromPointA / 8 * 1;
+                if (relRotY < returnToStripMinRot)
+                    targetRoll = Mathf.Pow(disFromPointA, 2) / (500 * rollSpeed);
                 else
-                    _controller.yawn = 0;
+                    targetRoll = 0;
             }
             else
             {
-                if (relRotY > -24)
-                    _controller.yawn = -disFromPointA / 8 * 1;
+                if (relRotY > -returnToStripMinRot)
+                    targetRoll = -Mathf.Pow(disFromPointA, 2) / (500 * rollSpeed);
                 else
-                    _controller.yawn = 0;
+                    targetRoll = 0;
             }
         }
         else
         {
+            //Become Parallel
             if (relRotY < 0)
             {
-                _controller.yawn = -Vector3.Dot(transform.GetChild(0).forward, pointB.transform.forward) * 0.7f;
+                targetRoll = -Vector3.Dot(transform.GetChild(0).forward, pointB.transform.forward) * rollSpeedParallel;
             }
             else if (relRotY != 0)
             {
-                _controller.yawn = Vector3.Dot(transform.GetChild(0).forward, pointB.transform.forward) * 0.7f;
+                targetRoll = Vector3.Dot(transform.GetChild(0).forward, pointB.transform.forward) * rollSpeedParallel;
             }
         }
+
+        targetRoll = Mathf.Clamp(targetRoll, -rollClamp, rollClamp);
     }
 
     //private void TurnToPoint()
