@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1125627143866167201}
   - component: {fileID: 85535559433183363}
   - component: {fileID: 5968513233504644982}
+  - component: {fileID: 2437069671983959455}
   - component: {fileID: 6903360032841381363}
   m_Layer: 0
   m_Name: Airplane AI
@@ -48,12 +49,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pointA: {fileID: 0}
+  _subState: 0
+  _enabled: 0
   pullUpSpeed: 9
-  pullUpLength: 1.5
+  pullUpLength: 1
   pitchUpSpeed: -0.2
   pullUpTargetPitch: 0.35
-  _subState: 0
-  parallelRotMult: 0.9
+  parallelRotMult: 0.7
   returnToStripRotMult: 1
   returnToStripMinRot: 24
 --- !u!114 &5968513233504644982
@@ -70,9 +72,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pitchMult: 0.05
   _subState: 0
+  _enabled: 0
   pointB: {fileID: 0}
   yawnSpeed: 1
-  rollSpeed: 0.1
+  rollSpeed: 50
+  rollSpeedParallel: 0.2
+  targetPitch: 0
+  targetRoll: 0
+  preParallelingRoll: 0.15
+  returnToStripMinRot: 16
+  rollClamp: 0.3
+  stripBuffer: 3
+  decendStartDistance: 800
+  leaveStateDistance: 400
+--- !u!114 &2437069671983959455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1125627143866167203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb205ed046ffa78448924fb463d83dfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointB: {fileID: 0}
+  _subState: 0
+  _enabled: 0
+  yawnSpeed: 0.5
+  rollSpeed: 0.6
+  pitchSpeed: 0.02
+  tipDownTriggerDistance: 14
+  tipDownSpeed: 8
+  tipDownMax: 20
+  targetPitch: 0.6
 --- !u!114 &6903360032841381363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,9 +187,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 748107487360155479, guid: 917e0675d5b82954ba6ee374508d7c5a,
+        type: 3}
+      propertyPath: rollSpeed
+      value: 160
+      objectReference: {fileID: 0}
     - target: {fileID: 748107487360155478, guid: 917e0675d5b82954ba6ee374508d7c5a,
         type: 3}
       propertyPath: _verticalVelocity.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1765538573, guid: 917e0675d5b82954ba6ee374508d7c5a, type: 3}
+      propertyPath: Debugs
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

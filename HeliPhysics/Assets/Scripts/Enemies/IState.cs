@@ -8,7 +8,6 @@ public interface IState
     void Setup(Transform pTarget, PlaneController pController, PlanePhysics pPhysics); // Replacement for Start
     void Enter(); // When entering state
     void Exit(); // When Exiting state
-    bool CanEnter(float pDistance); // Check if entering is possible
-    bool CanExit(float pDistance); // Check if exiting is possible
+    bool CanExit(); // Check if exiting is possible
     void Tick(); // Replacement for Update (Called every frame when it is the current state)
 }

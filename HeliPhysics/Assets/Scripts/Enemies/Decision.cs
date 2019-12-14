@@ -6,6 +6,7 @@ public class Decision : MonoBehaviour
 {
     private IState[] _states;
     private IState _currentState;
+    private int _currentStateIndex;
 
     [SerializeField] private Transform _target;
 
@@ -23,25 +24,13 @@ public class Decision : MonoBehaviour
         }
 
         //Start on least priority State that can be entered
-        StartLastState();
+        StartFirstState();
     }
 
-    private void StartLastState()
+    private void StartFirstState()
     {
-        //Enter least priority State that can be entered
-        for (int i = _states.Length - 1; i >= 0; i--)
-        {
-            //Get distance to target
-            float distance = Vector3.Distance(transform.position, _target.position);
-
-            //Check if can Enter
-            if (_states[i].CanEnter(distance))
-            {
-                _currentState = _states[i];
-                _currentState.Enter();
-                break;
-            }
-        }
+        _currentState = _states[0];
+        _currentState.Enter();
     }
 
     private void FixedUpdate()
@@ -56,29 +45,11 @@ public class Decision : MonoBehaviour
 
     private void CheckStates()
     {
-        //Get distance to target
-        float distance = Vector3.Distance(transform.position, _target.position);
-
-        //Return if you can't Exit current state
-        if (_currentState.CanExit(distance) == false) return;
-
-        foreach (IState state in _states)
+        //Switch to next State when done current State
+        if (_currentState.CanExit() == true)
         {
-            //Check if can stay in same state
-            if (_currentState == state)
-            {
-                if (state.CanEnter(distance))
-                    break;
-                else
-                    continue;
-            }
-
-            //Check if state can be entered
-            if (state.CanEnter(distance))
-            {
-                SwitchState(state);
-                break;
-            }
+            _currentStateIndex++;
+            SwitchState(_states[_currentStateIndex]);
         }
     }
 
@@ -95,12 +66,5 @@ public class Decision : MonoBehaviour
     public void ForceStateSwitch(IState pState)
     {
         SwitchState(pState);
-    }
-
-    //Resets the AI for respawning
-    public void Respawn()
-    {
-        _currentState.Exit();
-        StartLastState();
     }
 }

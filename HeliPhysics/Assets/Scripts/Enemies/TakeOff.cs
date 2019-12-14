@@ -10,20 +10,21 @@ public class TakeOff : MonoBehaviour, IState
 
     [SerializeField] private LandingStrip pointA;
 
+    [SerializeField] private int _subState = 0;
+    [SerializeField] private bool _enabled = false;
+    private float leaveStateTime = 0;
+
     [Header("Pitch")]
     [SerializeField] private float pullUpSpeed;
     [SerializeField] private float pullUpLength = 1.5f;
     [SerializeField] [Range(0, -1)] private float pitchUpSpeed = -0.5f;
     [SerializeField] [Range(0, 1)] private float pullUpTargetPitch = 0.2f;
-    [SerializeField] private int _subState = 0;
-    private float leaveStateTime = 0;
 
     [Header("Yawn")]
     [SerializeField] private float parallelRotMult = 1;
     [SerializeField] private float returnToStripRotMult = 1;
     [SerializeField] private float returnToStripMinRot = 20;
 
-    private bool _enabled = false;
 
     public void Setup(Transform pTarget, PlaneController pController, PlanePhysics pPhysics)
     {
@@ -44,12 +45,7 @@ public class TakeOff : MonoBehaviour, IState
         _enabled = false;
     }
 
-    public bool CanEnter(float pDistance)
-    {
-        return _subState != 3;
-    }
-
-    public bool CanExit(float pDistance)
+    public bool CanExit()
     {
         return _subState == 3;
     }
@@ -115,7 +111,6 @@ public class TakeOff : MonoBehaviour, IState
             float dotRight = Vector3.Dot(directionBetween.normalized, pointA.transform.right);
             float dotLeft = Vector3.Dot(directionBetween.normalized, -pointA.transform.right);
 
-            Debug.Log(relRotY);
             if (dotRight > dotLeft)
             {
                 if (relRotY < returnToStripMinRot)

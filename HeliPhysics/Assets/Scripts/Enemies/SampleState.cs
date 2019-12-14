@@ -27,12 +27,7 @@ public class SampleState : MonoBehaviour, IState
         _enabled = false;
     }
 
-    public bool CanEnter(float pDistance)
-    {
-        return true;
-    }
-
-    public bool CanExit(float pDistance)
+    public bool CanExit()
     {
         return true;
     }

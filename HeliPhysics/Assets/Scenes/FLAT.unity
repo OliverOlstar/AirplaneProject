@@ -601,16 +601,6 @@ PrefabInstance:
       propertyPath: pointA
       value: 
       objectReference: {fileID: 1677006067}
-    - target: {fileID: 85535559433183363, guid: dc513e6943c248241accca13310e3ee3,
-        type: 3}
-      propertyPath: parallelRotMult
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 85535559433183363, guid: dc513e6943c248241accca13310e3ee3,
-        type: 3}
-      propertyPath: pullUpLength
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2410139030989256795, guid: dc513e6943c248241accca13310e3ee3,
         type: 3}
       propertyPath: camera
@@ -623,28 +613,83 @@ PrefabInstance:
       objectReference: {fileID: 1847540301}
     - target: {fileID: 5968513233504644982, guid: dc513e6943c248241accca13310e3ee3,
         type: 3}
-      propertyPath: rollSpeed
-      value: 50
+      propertyPath: decendStartDistance
+      value: 755
+      objectReference: {fileID: 0}
+    - target: {fileID: 5968513233504644982, guid: dc513e6943c248241accca13310e3ee3,
+        type: 3}
+      propertyPath: stripBuffer
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5968513233504644982, guid: dc513e6943c248241accca13310e3ee3,
         type: 3}
       propertyPath: returnToStripMinRot
-      value: 12
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 5968513233504644982, guid: dc513e6943c248241accca13310e3ee3,
         type: 3}
-      propertyPath: rollSpeedParallel
-      value: 0.15
+      propertyPath: preParallelingRoll
+      value: 0.16
       objectReference: {fileID: 0}
     - target: {fileID: 5968513233504644982, guid: dc513e6943c248241accca13310e3ee3,
         type: 3}
       propertyPath: rollClamp
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5968513233504644982, guid: dc513e6943c248241accca13310e3ee3,
+        type: 3}
+      propertyPath: targetAngleMax
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 5968513233504644982, guid: dc513e6943c248241accca13310e3ee3,
+        type: 3}
+      propertyPath: targetAngleMin
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 5968513233504644982, guid: dc513e6943c248241accca13310e3ee3,
+        type: 3}
+      propertyPath: targetAngleTriggerDirection
+      value: -50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5968513233504644982, guid: dc513e6943c248241accca13310e3ee3,
+        type: 3}
+      propertyPath: rollSpeedParallel
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2437069671983959455, guid: dc513e6943c248241accca13310e3ee3,
+        type: 3}
+      propertyPath: pointB
+      value: 
+      objectReference: {fileID: 1847540301}
+    - target: {fileID: 2437069671983959455, guid: dc513e6943c248241accca13310e3ee3,
+        type: 3}
+      propertyPath: tipDownTriggerDistance
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 2437069671983959455, guid: dc513e6943c248241accca13310e3ee3,
+        type: 3}
+      propertyPath: tipDownSpeed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2437069671983959455, guid: dc513e6943c248241accca13310e3ee3,
+        type: 3}
+      propertyPath: targetPitch
       value: 0.2
       objectReference: {fileID: 0}
-    - target: {fileID: 432002687273399575, guid: dc513e6943c248241accca13310e3ee3,
+    - target: {fileID: 2437069671983959455, guid: dc513e6943c248241accca13310e3ee3,
         type: 3}
       propertyPath: rollSpeed
-      value: 160
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2437069671983959455, guid: dc513e6943c248241accca13310e3ee3,
+        type: 3}
+      propertyPath: tipDownMax
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2437069671983959455, guid: dc513e6943c248241accca13310e3ee3,
+        type: 3}
+      propertyPath: pitchSpeed
+      value: 0.03
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc513e6943c248241accca13310e3ee3, type: 3}

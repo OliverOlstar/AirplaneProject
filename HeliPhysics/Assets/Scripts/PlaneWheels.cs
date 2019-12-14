@@ -77,6 +77,7 @@ public class PlaneWheels : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        if (!Debugs) return;
         relativeRaycastDirection = transform.TransformDirection(raycastDirection).normalized;
         Gizmos.color = Color.green;
         Gizmos.DrawLine(transform.position + raycastStartOffset, transform.position + raycastStartOffset + (relativeRaycastDirection * raycastLength));
