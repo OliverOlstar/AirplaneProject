@@ -23,7 +23,9 @@ public class TakeOff : MonoBehaviour, IState
     [Header("Yawn")]
     [SerializeField] private float parallelRotMult = 1;
     [SerializeField] private float returnToStripRotMult = 1;
-    [SerializeField] private float returnToStripMinRot = 20;
+    [SerializeField] private float returnToStripAngle = 20;
+    [SerializeField] private float returnToStripBuffer = 1f;
+    [SerializeField] private float returnToStripMaxThrust = 3;
 
 
     public void Setup(Transform pTarget, PlaneController pController, PlanePhysics pPhysics)
@@ -52,7 +54,7 @@ public class TakeOff : MonoBehaviour, IState
 
     public void Tick()
     {
-        switch(_subState)
+        switch (_subState)
         {
             case 0:
                 //Acceleration
@@ -90,41 +92,91 @@ public class TakeOff : MonoBehaviour, IState
     private void StayOnLandingStrip()
     {
         //Rotate to be parallel to the landing strip
-        float relRotY = transform.GetChild(0).eulerAngles.y - pointA.transform.eulerAngles.y + 180;
-
-        if (relRotY < 0)
-        {
-            _controller.yawn = -Vector3.Dot(transform.GetChild(0).forward, pointA.transform.forward) * parallelRotMult;
-        }
-        else if (relRotY != 0)
-        {
-            _controller.yawn = Vector3.Dot(transform.GetChild(0).forward, pointA.transform.forward) * parallelRotMult;
-        }
+        float relRotY = transform.GetChild(0).eulerAngles.y - pointA.transform.eulerAngles.y - 180;
+        //Debug.Log(transform.GetChild(0).eulerAngles.y + " r|r " + pointA.transform.eulerAngles.y);
 
         //If outside of runway turn onto runway
         Vector3 directionBetween = transform.GetChild(0).position - pointA.transform.position;
         float disFromPointA = Vector3.Project(directionBetween, pointA.transform.right).magnitude - (pointA.stripWidth / 2);
         disFromPointA = Mathf.Min(disFromPointA, 10);
+        //Debug.Log(relRotY + " | " + disFromPointA);
+
+
+        //if (disFromPointA > -2)
+        //{
+
+        //    if (dotRight > dotLeft)
+        //    {
+        //        if (relRotY < returnToStripMinRot)
+        //            _controller.yawn = disFromPointA / 8 * returnToStripRotMult;
+        //        else
+        //            _controller.yawn = 0;
+        //    }
+        //    else
+        //    {
+        //        if (relRotY > -returnToStripMinRot)
+        //            _controller.yawn = -disFromPointA / 8 * returnToStripRotMult;
+        //        else
+        //            _controller.yawn = 0;
+        //    }
+        //}
+
+        float dotRight = Vector3.Dot(directionBetween.normalized, pointA.transform.right);
+        float dotLeft = Vector3.Dot(directionBetween.normalized, -pointA.transform.right);
+
+        float targetAngleMax = returnToStripAngle + returnToStripBuffer;
+        float targetAngleMin = returnToStripAngle - returnToStripBuffer;
 
         if (disFromPointA > -2)
         {
-            float dotRight = Vector3.Dot(directionBetween.normalized, pointA.transform.right);
-            float dotLeft = Vector3.Dot(directionBetween.normalized, -pointA.transform.right);
-
             if (dotRight > dotLeft)
             {
-                if (relRotY < returnToStripMinRot)
-                    _controller.yawn = disFromPointA / 8 * returnToStripRotMult;
-                else
+                if (relRotY < targetAngleMax && relRotY > targetAngleMin)
+                {
                     _controller.yawn = 0;
+                }
+                else
+                {
+                    if (relRotY > returnToStripAngle)
+                        _controller.yawn = -disFromPointA / 8 * returnToStripRotMult;
+                    else
+                        _controller.yawn = disFromPointA / 8 * returnToStripRotMult;
+                }
             }
             else
             {
-                if (relRotY > -returnToStripMinRot)
-                    _controller.yawn = -disFromPointA / 8 * returnToStripRotMult;
-                else
+                if (relRotY > -targetAngleMax && relRotY < -targetAngleMin)
+                {
                     _controller.yawn = 0;
+                }
+                else
+                {
+                    if (relRotY > -returnToStripAngle)
+                        _controller.yawn = -disFromPointA / 8 * returnToStripRotMult;
+                    else
+                        _controller.yawn = disFromPointA / 8 * returnToStripRotMult;
+                }
             }
+
+            //Slow Down
+            if (_physics.thrust >= returnToStripMaxThrust)
+            {
+                _controller.thrust = false;
+            }
+            else
+            {
+                _controller.thrust = true;
+            }
+        }
+        else
+        {
+            // Become Parallel
+            if (relRotY != 0)
+            {
+                _controller.yawn = Mathf.Clamp(-relRotY / 15, -1, 1) * parallelRotMult;
+            }
+
+            _controller.thrust = true;
         }
     }
 }

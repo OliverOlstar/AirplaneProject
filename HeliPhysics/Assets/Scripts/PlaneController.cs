@@ -23,9 +23,10 @@ public class PlaneController : MonoBehaviour
     [SerializeField] private float minThrust = 0;
     [SerializeField] private float thrustRampupSpeed = 1;
 
-    [HideInInspector] public float pitch;
-    [HideInInspector] public float yawn;
-    [HideInInspector] public float roll;
+    [Header("Inputs")]
+    public float pitch;
+    public float yawn;
+    public float roll;
     public bool thrust;
     private bool thrusting = false;
 

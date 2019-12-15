@@ -25,7 +25,6 @@ public class FlyToTarget : MonoBehaviour, IState
     [SerializeField] [Range(0, 0.5f)] private float preParallelingRoll = 0.1f;
     [SerializeField] private float targetRelAngle = 16;
     [SerializeField] private float targetAngleBuffer = 1;
-    [SerializeField] private float targetAngleTriggerDirection = -20;
     [SerializeField] private float rollClamp = 0.25f;
 
     [SerializeField] private float stripBuffer = 2;
@@ -145,6 +144,8 @@ public class FlyToTarget : MonoBehaviour, IState
         }
         else
         {
+            Debug.Log("PARALLEL");
+
             // Become Parallel
             if (relRotY < 0)
             {
@@ -154,6 +155,12 @@ public class FlyToTarget : MonoBehaviour, IState
             {
                 targetRoll = -Mathf.Pow(Vector3.Dot(transform.GetChild(0).forward, pointB.transform.forward), 2) * rollSpeedParallel;
             }
+
+            // Become Parallel
+            //if (relRotY != 0)
+            //{
+            //    _controller.roll = Mathf.Clamp(relRotY / 180, -1, 1) * rollSpeedParallel;
+            //}
         }
 
         targetRoll = Mathf.Clamp(targetRoll, -rollClamp, rollClamp);

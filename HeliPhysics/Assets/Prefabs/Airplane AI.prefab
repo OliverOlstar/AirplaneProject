@@ -55,9 +55,11 @@ MonoBehaviour:
   pullUpLength: 1
   pitchUpSpeed: -0.2
   pullUpTargetPitch: 0.35
-  parallelRotMult: 0.7
+  parallelRotMult: 1
   returnToStripRotMult: 1
-  returnToStripMinRot: 24
+  returnToStripAngle: 50
+  returnToStripBuffer: 1
+  returnToStripMaxThrust: 2
 --- !u!114 &5968513233504644982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70,20 +72,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92cd09e4f4e45c6419693c83af7781c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pitchMult: 0.05
+  pointB: {fileID: 0}
   _subState: 0
   _enabled: 0
-  pointB: {fileID: 0}
+  pitchMult: 0.05
   yawnSpeed: 1
   rollSpeed: 50
   rollSpeedParallel: 0.2
   targetPitch: 0
   targetRoll: 0
   preParallelingRoll: 0.15
-  returnToStripMinRot: 16
-  rollClamp: 0.3
-  stripBuffer: 3
-  decendStartDistance: 800
+  targetRelAngle: 12
+  targetAngleBuffer: 3
+  rollClamp: 0.4
+  stripBuffer: 2
+  decendStartDistance: 750
   leaveStateDistance: 400
 --- !u!114 &2437069671983959455
 MonoBehaviour:
@@ -101,12 +104,12 @@ MonoBehaviour:
   _subState: 0
   _enabled: 0
   yawnSpeed: 0.5
-  rollSpeed: 0.6
-  pitchSpeed: 0.02
-  tipDownTriggerDistance: 14
+  rollSpeed: 0.8
+  pitchSpeed: 0.03
+  tipDownTriggerDistance: 16
   tipDownSpeed: 8
   tipDownMax: 20
-  targetPitch: 0.6
+  targetPitch: 0.2
 --- !u!114 &6903360032841381363
 MonoBehaviour:
   m_ObjectHideFlags: 0
