@@ -49,6 +49,9 @@ public class PlaneWheels : MonoBehaviour
 
     private Vector3 CalculateNormal(RaycastHit pHit)
     {
+        //If to far from down direction ignore wheel collision (stops sticking to side of wall)
+        if (Vector3.Dot(pHit.normal, Vector3.down) > 0.65f) return Vector3.zero;
+
         float normalMult = bounciness + -pHit.distance + raycastExtraLength;
         if (normalMult < 0)
         {

@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlaneController : MonoBehaviour
 {
     private PlanePhysics physics;
+    private Fuel fuel;
 
     [SerializeField] private float yawnSpeed = 5;
     [SerializeField] private float pitchSpeed = 5;
@@ -34,10 +35,20 @@ public class PlaneController : MonoBehaviour
     {
         physics = GetComponent<PlanePhysics>();
         _LocalRotation = transform.localEulerAngles;
+        fuel = GetComponentInParent<Fuel>();
     }
 
     void Update()
     {
+        // Fuel
+        if (fuel)
+        {
+            if (fuel.GetFuel() <= 0)
+                thrust = false;
+            else
+                if (thrusting) fuel.ModifyFuel(-Time.deltaTime);
+        }
+
         //Change Effect based on current speed
         Rotation();
     }
@@ -48,7 +59,7 @@ public class PlaneController : MonoBehaviour
         if (thrust != thrusting)
         {
             StopCoroutine("rampupThrust");
-            StartCoroutine("rampupThrust", (thrust ? 1 : -1));
+            StartCoroutine("rampupThrust", thrust ? 1 : -1);
             thrusting = thrust;
         }
 

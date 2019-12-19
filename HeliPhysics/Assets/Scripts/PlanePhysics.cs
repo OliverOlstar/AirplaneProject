@@ -121,7 +121,7 @@ public class PlanePhysics : MonoBehaviour
             angle = 360 - angle + 180;
 
         float angle01 = (angle - 90) / 180;
-        float quadraticValue = GetQuadraticCurveValue(angle01, _bestLiftAngle, -0.5f, -0.8f, 1, 1, 0.1f, 0);
+        float quadraticValue = GetQuadraticCurveValue(angle01, _bestLiftAngle, -1f, -1f, 1, 1, 0.1f, 0);
         float liftMag = quadraticValue * _liftMax * (_horizontalVelocity.magnitude * _liftMultH + _liftMinH);
 
         //Debug.Log(transform.localEulerAngles.x + " | Angle01: " + angle01 + " | LiftMag: " + liftMag);

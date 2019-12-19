@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 720826030}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 2.2, y: -0.91, z: 0.18}
+  m_LocalPosition: {x: 2.199994, y: -0.9100163, z: 0.29219025}
   m_LocalScale: {x: 0.09246519, y: 0.3104458, z: 0.14653483}
   m_Children: []
   m_Father: {fileID: 748107487558183198}
@@ -55,7 +55,7 @@ MonoBehaviour:
   raycastDirection: {x: -0.25, y: -1, z: 0}
   raycastLength: 2
   raycastStartOffset: {x: 0, y: 0.5, z: 0.17}
-  raycastExtraLength: 0.72
+  raycastExtraLength: 0.694
   raycastExtraMult: 0.22
   raycastMult: 6
   coefficientOfFriction: 0.4
@@ -64,7 +64,7 @@ MonoBehaviour:
   bounciness: 0
   rotation: {x: -0.5, y: 0, z: 1}
   rotationMult: 120
-  Debugs: 0
+  Debugs: 1
 --- !u!1 &753522768
 GameObject:
   m_ObjectHideFlags: 0
@@ -91,7 +91,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 753522768}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -2.1999943, y: -0.91000307, z: 0.18001007}
+  m_LocalPosition: {x: -2.2, y: -0.91, z: 0.2922}
   m_LocalScale: {x: 0.09246519, y: 0.31044582, z: 0.14653483}
   m_Children: []
   m_Father: {fileID: 748107487558183198}
@@ -120,7 +120,7 @@ MonoBehaviour:
   raycastDirection: {x: -0.25, y: -1, z: 0}
   raycastLength: 2
   raycastStartOffset: {x: 0, y: 0.5, z: 0.17}
-  raycastExtraLength: 0.72
+  raycastExtraLength: 0.694
   raycastExtraMult: 0.22
   raycastMult: 6
   coefficientOfFriction: 0.4
@@ -129,7 +129,7 @@ MonoBehaviour:
   bounciness: 0
   rotation: {x: -0.5, y: 0, z: -1}
   rotationMult: 120
-  Debugs: 0
+  Debugs: 1
 --- !u!1 &1765538568
 GameObject:
   m_ObjectHideFlags: 0
@@ -156,7 +156,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1765538568}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: -0.78, z: -0.42}
+  m_LocalPosition: {x: 0, y: -0.78, z: -0.355}
   m_LocalScale: {x: 0.09246519, y: 0.27541324, z: 0.14653483}
   m_Children: []
   m_Father: {fileID: 748107487558183198}
@@ -185,7 +185,7 @@ MonoBehaviour:
   raycastDirection: {x: -0.25, y: -1, z: 0}
   raycastLength: 2
   raycastStartOffset: {x: 0, y: 0.5, z: 0.13}
-  raycastExtraLength: 0.612
+  raycastExtraLength: 0.581
   raycastExtraMult: 0.22
   raycastMult: 6
   coefficientOfFriction: 0.01
@@ -244,7 +244,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   yawnSpeed: 20
   pitchSpeed: 40
-  rollSpeed: 80
+  rollSpeed: 130
   TurnDampening: 10
   speedNeededToPitch: 6
   speedNeededToRoll: 5
@@ -269,7 +269,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _velocity: {x: 0, y: 0, z: 0}
   _horizontalVelocity: {x: 0, y: 0, z: 0}
-  _verticalVelocity: {x: 0, y: 4, z: 0}
+  _verticalVelocity: {x: 0, y: 0, z: 0}
   _lift: {x: 0, y: 0, z: 0}
   _gravity: {x: 0, y: -9.81, z: 0}
   _horizontalDrag: {x: 0, y: 0, z: 0}
@@ -285,7 +285,7 @@ MonoBehaviour:
   _dragHDefault: 0
   _liftMultH: 0.085
   _liftMinH: 0.1
-  _liftMax: 10
+  _liftMax: 11
   _VoHMultDown: 1
   _VoHMultUp: -2
   _turbulanceStartValue: 6
