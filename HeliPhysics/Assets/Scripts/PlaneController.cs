@@ -67,12 +67,12 @@ public class PlaneController : MonoBehaviour
         transform.Rotate(Vector3.up, Time.deltaTime * yawnSpeed * yawn * Mathf.Min(physics._horizontalVelocity.magnitude, 1));
 
         //Elevators - Pitch
-        if (physics._horizontalVelocity.magnitude > speedNeededToPitch)
-            transform.Rotate(Vector3.right, Time.deltaTime * pitchSpeed * pitch * Mathf.Min(physics._horizontalVelocity.magnitude / 5 - speedNeededToPitch / 5, 1));
+        if (physics._velocity.magnitude > speedNeededToPitch)
+            transform.Rotate(Vector3.right, Time.deltaTime * pitchSpeed * pitch * Mathf.Min(physics._velocity.magnitude / 5 - speedNeededToPitch / 5, 1));
 
         //Ailerons - Roll
-        if (physics._horizontalVelocity.magnitude > speedNeededToRoll)
-            transform.Rotate(Vector3.forward, Time.deltaTime * rollSpeed * -roll * Mathf.Min(physics._horizontalVelocity.magnitude / 5 - speedNeededToRoll / 5, 1));
+        if (physics._velocity.magnitude > speedNeededToRoll)
+            transform.Rotate(Vector3.forward, Time.deltaTime * rollSpeed * -roll * Mathf.Min(physics._velocity.magnitude / 5 - speedNeededToRoll / 5, 1));
     }
 
     private void LerpRotation()

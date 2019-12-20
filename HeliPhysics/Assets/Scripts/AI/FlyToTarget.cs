@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class FlyToTarget : MonoBehaviour, IState
 {
-    private Transform _target;
     private PlaneController _controller;
     private PlanePhysics _physics;
 
-    [SerializeField] private LandingStrip pointB;
-    [SerializeField] private int _subState = 0;
+    public LandingStrip pointB;
 
     [SerializeField] private bool _enabled = false;
     private bool _canExit = false;
@@ -37,9 +35,15 @@ public class FlyToTarget : MonoBehaviour, IState
     [SerializeField] private float ODDistance = 10;
     [SerializeField] private float ODHorizontalVelMult = 2;
 
-    public void Setup(Transform pTarget, PlaneController pController, PlanePhysics pPhysics)
+    [Header("Pitch")]
+
+    [Header("Pitch To Target")]
+    [SerializeField] private float RelHeightTargetHeight = 60;
+    [SerializeField] private float relHeightMult = 0.1f;
+    [SerializeField] private float relHeightPitchClamp = 3f;
+
+    public void Setup(PlaneController pController, PlanePhysics pPhysics)
     {
-        _target = pTarget;
         _controller = pController;
         _physics = pPhysics;
     }
@@ -67,17 +71,28 @@ public class FlyToTarget : MonoBehaviour, IState
 
         if (distance <= leaveStateDistance)
         {
+            // Switch to Landing
             _canExit = true;
         }
         else if (distance <= decendStartDistance)
         {
+            // Start Decending
             _controller.thrust = false;
             targetPitch = -1f;
         }
 
         LevelOut();
+
         StayOnLandingStrip();
+        PitchUpToTarget();
         AvoidObsticals();
+    }
+
+    private void PitchUpToTarget()
+    {
+        float relHeight = (transform.GetChild(0).position.y - pointB.transform.position.y - RelHeightTargetHeight) * relHeightMult;
+        //Debug.Log(relHeight);
+        targetPitch = Mathf.Clamp(-relHeight, -relHeightPitchClamp, relHeightPitchClamp);
     }
 
     private void LevelOut()
@@ -90,79 +105,59 @@ public class FlyToTarget : MonoBehaviour, IState
     private void StayOnLandingStrip()
     {
         // Rotate to be parallel to the landing strip
-        float relRotY = transform.GetChild(0).eulerAngles.y - pointB.transform.eulerAngles.y + 180;
+        //float myRot = transform.GetChild(0).eulerAngles.y;
+
+
+        //Debug.Log(transform.GetChild(0).eulerAngles.y + " r|r " + pointB.transform.eulerAngles.y + " | Rel: " + relRotY);
+
 
         // If outside of runway turn onto runway
         Vector3 directionBetween = transform.GetChild(0).position - pointB.transform.position;
         float disFromPointA = Vector3.Project(directionBetween, pointB.transform.right).magnitude - (pointB.stripWidth / 2);
         disFromPointA = Mathf.Min(disFromPointA, 500);
 
+        float dotRight = Vector3.Dot(directionBetween.normalized, pointB.transform.right);
+
+        float relRotY = Vector3.SignedAngle(transform.GetChild(0).forward, -pointB.transform.forward, Vector3.up);
+
         if (disFromPointA > -stripBuffer)
         {
-            float dotRight = Vector3.Dot(directionBetween.normalized, pointB.transform.right);
-            float dotLeft = Vector3.Dot(directionBetween.normalized, -pointB.transform.right);
+            float targetAngleMax = (targetRelAngle + targetAngleBuffer);
+            float targetAngleMin = (targetRelAngle - targetAngleBuffer);
+            float Left = dotRight > 0 ? -1 : 1;
+            relRotY *= Left;
 
-            float targetAngleMax = targetRelAngle + targetAngleBuffer;
-            float targetAngleMin = targetRelAngle - targetAngleBuffer;
-
-            //Debug.Log(relRotY);
-            if (dotRight > dotLeft)
+            if (relRotY < targetAngleMax && relRotY > targetAngleMin)
             {
-                Debug.Log("Right - Max: " + (relRotY < targetAngleMax) + " | Min: " + (relRotY > targetAngleMin));
-
-                if (relRotY < targetAngleMax && relRotY > targetAngleMin)
-                {
-                    //Debug.Log("In range");
-
-                    targetRoll = 0;
-                }
-                else
-                {
-                    //Debug.Log("Out of range");
-
-                    if (relRotY > targetRelAngle)
-                        targetRoll = -preParallelingRoll;
-                    else
-                        targetRoll = preParallelingRoll;
-                }
+                // In Range
+                targetRoll = 0;
             }
             else
             {
-                //Debug.Log("Left");
-
-                if (relRotY > -targetAngleMax && relRotY < -targetAngleMin)
-                {
-                    //Debug.Log("In range");
-
-                    targetRoll = 0;
-                }
+                // Out of Range
+                if (relRotY > targetRelAngle)
+                    targetRoll = preParallelingRoll * Left;
                 else
-                {
-                    //Debug.Log("Out of range");
-
-                    if (relRotY > -targetRelAngle)
-                        targetRoll = -preParallelingRoll;
-                    else
-                        targetRoll = preParallelingRoll;
-                }
+                    targetRoll = -preParallelingRoll * Left;
             }
         }
         else
         {
-            //Debug.Log("PARALLEL");
-
+            //relRotY = Mathf.Abs(relRotY);
+            Debug.Log("Parallel " + Vector3.Dot(transform.GetChild(0).forward, pointB.transform.forward));
             // Become Parallel
+
             if (relRotY < -4)
-            {
-                targetRoll = Mathf.Pow(Vector3.Dot(transform.GetChild(0).forward, pointB.transform.forward), 2) * rollSpeedParallel;
-            }
-            else if (relRotY > 4)
             {
                 targetRoll = -Mathf.Pow(Vector3.Dot(transform.GetChild(0).forward, pointB.transform.forward), 2) * rollSpeedParallel;
             }
+            else if (relRotY > 4)
+            {
+                targetRoll = Mathf.Pow(Vector3.Dot(transform.GetChild(0).forward, pointB.transform.forward), 2) * rollSpeedParallel;
+            }
             else
             {
-                if (relRotY < 0)
+                if (relRotY > 0)
                 {
                     _controller.yawn = -Vector3.Dot(transform.GetChild(0).forward, pointB.transform.forward) * yawnSpeed;
                 }
@@ -180,35 +175,31 @@ public class FlyToTarget : MonoBehaviour, IState
 
     private void AvoidObsticals()
     {
-        bool[] hits = new bool[3];
+        bool[] hits = new bool[2];
         Vector3 forward = _physics._velocity.normalized;
         float raycastDistance = ODDistance + _physics._horizontalVelocity.magnitude * ODHorizontalVelMult;
         RaycastHit hit;
 
-        if (Physics.Raycast(transform.GetChild(0).position, forward, out hit, raycastDistance))
-        {
-            hits[1] = true;
-        }
         if (Physics.Raycast(transform.GetChild(0).position + transform.GetChild(0).right * 2.7f, forward, out hit, raycastDistance))
         {
             hits[0] = true;
         }
         if (Physics.Raycast(transform.GetChild(0).position - transform.GetChild(0).right * 2.7f, forward, out hit, raycastDistance))
         {
-            hits[2] = true;
+            hits[1] = true;
         }
 
-        if (hits[0] && !hits[2])
+        if (hits[0] && !hits[1])
         {
             // Go Soft left
             targetRoll = -0.5f;
         }
-        else if (hits[2] && !hits[0])
+        else if (hits[1] && !hits[0])
         {
             // Go Soft right
             targetRoll = 0.5f;
         }
-        else if (hits[0] || hits[1] || hits[2])
+        else if (hits[0] || hits[1])
         {
             // All hit check if it can do a soft left turn
             Vector3 rayDirection = (forward + transform.GetChild(0).right * 0.75f).normalized;
@@ -264,7 +255,6 @@ public class FlyToTarget : MonoBehaviour, IState
         Vector3 forward = _physics._velocity.normalized;
         Gizmos.color = Color.red;
 
-        Gizmos.DrawLine(transform.GetChild(0).position, transform.GetChild(0).position + forward * (ODDistance + _physics._horizontalVelocity.magnitude * ODHorizontalVelMult));
         Gizmos.DrawLine(transform.GetChild(0).position + transform.GetChild(0).right * 2.7f, transform.GetChild(0).position + transform.GetChild(0).right * 2.7f + forward * (ODDistance + _physics._horizontalVelocity.magnitude * ODHorizontalVelMult));
         Gizmos.DrawLine(transform.GetChild(0).position - transform.GetChild(0).right * 2.7f, transform.GetChild(0).position - transform.GetChild(0).right * 2.7f + forward * (ODDistance + _physics._horizontalVelocity.magnitude * ODHorizontalVelMult));
     }

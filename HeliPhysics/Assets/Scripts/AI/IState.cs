@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public interface IState
 {
-    void Setup(Transform pTarget, PlaneController pController, PlanePhysics pPhysics); // Replacement for Start
+    void Setup(PlaneController pController, PlanePhysics pPhysics); // Replacement for Start
     void Enter(); // When entering state
     void Exit(); // When Exiting state
     bool CanExit(); // Check if exiting is possible

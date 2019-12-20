@@ -8,8 +8,6 @@ public class Decision : MonoBehaviour
     private IState _currentState;
     private int _currentStateIndex;
 
-    [SerializeField] private Transform _target;
-
     void Start()
     {
         //Get States
@@ -20,7 +18,7 @@ public class Decision : MonoBehaviour
         //Setup States
         foreach(IState state in _states)
         {
-            state.Setup(_target, controller, physics);
+            state.Setup(controller, physics);
         }
 
         //Start on least priority State that can be entered

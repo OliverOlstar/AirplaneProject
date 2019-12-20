@@ -302,15 +302,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 748107487360155479, guid: 917e0675d5b82954ba6ee374508d7c5a,
+        type: 3}
+      propertyPath: pitchSpeed
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 1765538573, guid: 917e0675d5b82954ba6ee374508d7c5a, type: 3}
+      propertyPath: Debugs
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 720826035, guid: 917e0675d5b82954ba6ee374508d7c5a, type: 3}
       propertyPath: Debugs
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 753522773, guid: 917e0675d5b82954ba6ee374508d7c5a, type: 3}
-      propertyPath: Debugs
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1765538573, guid: 917e0675d5b82954ba6ee374508d7c5a, type: 3}
       propertyPath: Debugs
       value: 0
       objectReference: {fileID: 0}

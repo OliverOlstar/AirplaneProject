@@ -6,7 +6,7 @@ public class Fuel : MonoBehaviour
 {
     private float fuel;
     [SerializeField] private float maxFuel = 120;
-    [SerializeField] private RectTransform fuelBar;
+    [HideInInspector] public RectTransform fuelBar;
 
     // Start is called before the first frame update
     void Start()

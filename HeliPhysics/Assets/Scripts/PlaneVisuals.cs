@@ -8,7 +8,7 @@ public class PlaneVisuals : MonoBehaviour
     private PlanePhysics _physics;
     private PlaneController _controller;
     [SerializeField] private float rotationDampening = 5;
-    [SerializeField] private CameraPivot camera;
+    [HideInInspector] public CameraPivot camera;
 
     [Space]
     [SerializeField] private Transform propeller;

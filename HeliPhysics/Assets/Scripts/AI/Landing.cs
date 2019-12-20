@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class Landing : MonoBehaviour, IState
 {
-    private Transform _target;
     private PlaneController _controller;
     private PlanePhysics _physics;
 
-    [SerializeField] private LandingStrip pointB;
-    [SerializeField] private int _subState = 0;
+    public LandingStrip pointB;
     [SerializeField] private bool _enabled = false;
 
     [Header("Speeds")]
@@ -25,10 +23,8 @@ public class Landing : MonoBehaviour, IState
     [Space]
     [SerializeField] private float targetPitch = 0;
 
-
-    public void Setup(Transform pTarget, PlaneController pController, PlanePhysics pPhysics)
+    public void Setup(PlaneController pController, PlanePhysics pPhysics)
     {
-        _target = pTarget;
         _controller = pController;
         _physics = pPhysics;
     }
@@ -52,7 +48,7 @@ public class Landing : MonoBehaviour, IState
     public void Tick()
     {
         float relY = transform.GetChild(0).position.y - pointB.transform.position.y;
-        Debug.Log("Landing: " + relY);
+        //Debug.Log("Landing: " + relY);
 
         if (relY < tipDownTriggerDistance)
         {
@@ -62,6 +58,12 @@ public class Landing : MonoBehaviour, IState
 
         LevelOut();
         MakeParallel();
+
+        if (_enabled == true && _physics._velocity.magnitude <= 0.2f)
+        {
+            StartCoroutine("CrashSelfRoutine");
+            _enabled = false;
+        }
     }
 
     private void MakeParallel()
@@ -83,5 +85,17 @@ public class Landing : MonoBehaviour, IState
     {
         _controller.pitch = (_physics._verticalVelocity.y + targetPitch) * pitchSpeed;
         _controller.roll = -_physics._angluarVelocity.y * rollSpeed;
+    }
+
+    private IEnumerator CrashSelfRoutine()
+    {
+        yield return new WaitForSeconds(10);
+        transform.GetComponentInChildren<PlaneCrash>().Crashed();
+    }
+
+    private IEnumerator DestroySelfRoutine()
+    {
+        yield return new WaitForSeconds(20);
+        Destroy(transform.parent.gameObject);
     }
 }

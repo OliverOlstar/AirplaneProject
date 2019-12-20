@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class TakeOff : MonoBehaviour, IState
 {
-    private Transform _target;
     private PlaneController _controller;
     private PlanePhysics _physics;
 
-    [SerializeField] private LandingStrip pointA;
+    public LandingStrip pointA;
 
     [SerializeField] private int _subState = 0;
     [SerializeField] private bool _enabled = false;
@@ -28,9 +27,8 @@ public class TakeOff : MonoBehaviour, IState
     [SerializeField] private float returnToStripMaxThrust = 3;
 
 
-    public void Setup(Transform pTarget, PlaneController pController, PlanePhysics pPhysics)
+    public void Setup(PlaneController pController, PlanePhysics pPhysics)
     {
-        _target = pTarget;
         _controller = pController;
         _physics = pPhysics;
     }
@@ -92,7 +90,7 @@ public class TakeOff : MonoBehaviour, IState
     private void StayOnLandingStrip()
     {
         //Rotate to be parallel to the landing strip
-        float relRotY = transform.GetChild(0).eulerAngles.y - pointA.transform.eulerAngles.y - 180;
+        float relRotY = transform.GetChild(0).eulerAngles.y - pointA.transform.eulerAngles.y;
         //Debug.Log(transform.GetChild(0).eulerAngles.y + " r|r " + pointA.transform.eulerAngles.y);
 
         //If outside of runway turn onto runway
@@ -121,8 +119,8 @@ public class TakeOff : MonoBehaviour, IState
         //    }
         //}
 
-        float dotRight = Vector3.Dot(directionBetween.normalized, pointA.transform.right);
-        float dotLeft = Vector3.Dot(directionBetween.normalized, -pointA.transform.right);
+        float dotRight = Vector3.Dot(directionBetween.normalized, -pointA.transform.right);
+        float dotLeft = Vector3.Dot(directionBetween.normalized, pointA.transform.right);
 
         float targetAngleMax = returnToStripAngle + returnToStripBuffer;
         float targetAngleMin = returnToStripAngle - returnToStripBuffer;
@@ -158,7 +156,7 @@ public class TakeOff : MonoBehaviour, IState
                 }
             }
 
-            //Slow Down
+            //Slow Down if outside strip
             if (_physics.thrust >= returnToStripMaxThrust)
             {
                 _controller.thrust = false;

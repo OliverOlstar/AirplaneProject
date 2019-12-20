@@ -10,9 +10,8 @@ public class SampleState : MonoBehaviour, IState
 
     private bool _enabled = false;
 
-    public void Setup(Transform pTarget, PlaneController pController, PlanePhysics pPhysics)
+    public void Setup(PlaneController pController, PlanePhysics pPhysics)
     {
-        _target = pTarget;
         _controller = pController;
         _physics = pPhysics;
     }
