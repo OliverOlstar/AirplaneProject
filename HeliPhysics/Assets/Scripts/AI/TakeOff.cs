@@ -90,70 +90,36 @@ public class TakeOff : MonoBehaviour, IState
     private void StayOnLandingStrip()
     {
         //Rotate to be parallel to the landing strip
-        float relRotY = transform.GetChild(0).eulerAngles.y - pointA.transform.eulerAngles.y;
-        //Debug.Log(transform.GetChild(0).eulerAngles.y + " r|r " + pointA.transform.eulerAngles.y);
+        float relRotY = Vector3.SignedAngle(transform.GetChild(0).forward, pointA.transform.forward, Vector3.up);
 
         //If outside of runway turn onto runway
         Vector3 directionBetween = transform.GetChild(0).position - pointA.transform.position;
         float disFromPointA = Vector3.Project(directionBetween, pointA.transform.right).magnitude - (pointA.stripWidth / 2);
         disFromPointA = Mathf.Min(disFromPointA, 10);
-        //Debug.Log(relRotY + " | " + disFromPointA);
 
-
-        //if (disFromPointA > -2)
-        //{
-
-        //    if (dotRight > dotLeft)
-        //    {
-        //        if (relRotY < returnToStripMinRot)
-        //            _controller.yawn = disFromPointA / 8 * returnToStripRotMult;
-        //        else
-        //            _controller.yawn = 0;
-        //    }
-        //    else
-        //    {
-        //        if (relRotY > -returnToStripMinRot)
-        //            _controller.yawn = -disFromPointA / 8 * returnToStripRotMult;
-        //        else
-        //            _controller.yawn = 0;
-        //    }
-        //}
-
-        float dotRight = Vector3.Dot(directionBetween.normalized, -pointA.transform.right);
-        float dotLeft = Vector3.Dot(directionBetween.normalized, pointA.transform.right);
+        float dotRight = Vector3.Dot(directionBetween.normalized, pointA.transform.right);
 
         float targetAngleMax = returnToStripAngle + returnToStripBuffer;
         float targetAngleMin = returnToStripAngle - returnToStripBuffer;
 
+        //Am I outside the strip
         if (disFromPointA > -2)
         {
-            if (dotRight > dotLeft)
+            float left = dotRight > 0 ? 1 : -1;
+            relRotY *= left;
+
+            // Am I within the target return angle
+            if (relRotY < targetAngleMax && relRotY > targetAngleMin)
             {
-                if (relRotY < targetAngleMax && relRotY > targetAngleMin)
-                {
-                    _controller.yawn = 0;
-                }
-                else
-                {
-                    if (relRotY > returnToStripAngle)
-                        _controller.yawn = -disFromPointA / 8 * returnToStripRotMult;
-                    else
-                        _controller.yawn = disFromPointA / 8 * returnToStripRotMult;
-                }
+                _controller.yawn = 0;
             }
             else
             {
-                if (relRotY > -targetAngleMax && relRotY < -targetAngleMin)
-                {
-                    _controller.yawn = 0;
-                }
+                // Rotate to face target return angle
+                if (relRotY > returnToStripAngle)
+                    _controller.yawn = disFromPointA / 8 * returnToStripRotMult * left;
                 else
-                {
-                    if (relRotY > -returnToStripAngle)
-                        _controller.yawn = -disFromPointA / 8 * returnToStripRotMult;
-                    else
-                        _controller.yawn = disFromPointA / 8 * returnToStripRotMult;
-                }
+                    _controller.yawn = disFromPointA / 8 * returnToStripRotMult * -left;
             }
 
             //Slow Down if outside strip
@@ -168,10 +134,10 @@ public class TakeOff : MonoBehaviour, IState
         }
         else
         {
-            // Become Parallel
+            // Become Parallel and Speed up
             if (relRotY != 0)
             {
-                _controller.yawn = Mathf.Clamp(-relRotY / 15, -1, 1) * parallelRotMult;
+                _controller.yawn = Mathf.Clamp(relRotY / 15, -1, 1) * parallelRotMult;
             }
 
             _controller.thrust = true;

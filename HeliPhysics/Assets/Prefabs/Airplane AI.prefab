@@ -58,8 +58,8 @@ MonoBehaviour:
   pullUpTargetPitch: 0.35
   parallelRotMult: 1
   returnToStripRotMult: 1
-  returnToStripAngle: 50
-  returnToStripBuffer: 1
+  returnToStripAngle: 65
+  returnToStripBuffer: 5
   returnToStripMaxThrust: 2
 --- !u!114 &3296699553498803735
 MonoBehaviour:
@@ -111,7 +111,7 @@ MonoBehaviour:
   pitchSpeed: 0.03
   tipDownTriggerDistance: 16
   tipDownSpeed: 7
-  tipDownMax: 2
+  tipDownMax: 6
   targetPitch: 0.2
 --- !u!114 &2367196518170801298
 MonoBehaviour:
@@ -306,6 +306,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8109670126012411584}
     m_Modifications:
+    - target: {fileID: 748107487360155480, guid: 917e0675d5b82954ba6ee374508d7c5a,
+        type: 3}
+      propertyPath: m_Name
+      value: Airplane CenterOfMass
+      objectReference: {fileID: 0}
     - target: {fileID: 748107487360155476, guid: 917e0675d5b82954ba6ee374508d7c5a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -360,11 +365,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 748107487360155480, guid: 917e0675d5b82954ba6ee374508d7c5a,
-        type: 3}
-      propertyPath: m_Name
-      value: Airplane CenterOfMass
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 917e0675d5b82954ba6ee374508d7c5a, type: 3}
