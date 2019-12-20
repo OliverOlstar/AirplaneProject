@@ -68,11 +68,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7731285923430505165}
     m_Modifications:
-    - target: {fileID: 6168688126404197674, guid: b1203d347ef101744816fd6fdf205efd,
-        type: 3}
-      propertyPath: m_Name
-      value: Airplane Visuals
-      objectReference: {fileID: 0}
     - target: {fileID: 6168688126404197670, guid: b1203d347ef101744816fd6fdf205efd,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -128,11 +123,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6168688126404197675, guid: b1203d347ef101744816fd6fdf205efd,
+    - target: {fileID: 6168688126404197674, guid: b1203d347ef101744816fd6fdf205efd,
         type: 3}
-      propertyPath: _target
-      value: 
-      objectReference: {fileID: 7001624478779326584}
+      propertyPath: m_Name
+      value: Airplane Visuals
+      objectReference: {fileID: 0}
     - target: {fileID: 721730228, guid: b1203d347ef101744816fd6fdf205efd, type: 3}
       propertyPath: actualPlane
       value: 
@@ -141,6 +136,11 @@ PrefabInstance:
       propertyPath: crashedPlane
       value: 
       objectReference: {fileID: 1932552220383655039}
+    - target: {fileID: 6168688126404197675, guid: b1203d347ef101744816fd6fdf205efd,
+        type: 3}
+      propertyPath: _target
+      value: 
+      objectReference: {fileID: 7001624478779326584}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1203d347ef101744816fd6fdf205efd, type: 3}
 --- !u!4 &5018844882325245242 stripped
@@ -156,16 +156,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7731285923430505165}
     m_Modifications:
-    - target: {fileID: 6168688126404197674, guid: e373f3e7cb81856418a225d798255afa,
-        type: 3}
-      propertyPath: m_Name
-      value: Airplane Crash
-      objectReference: {fileID: 0}
-    - target: {fileID: 6168688126404197674, guid: e373f3e7cb81856418a225d798255afa,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6168688126404197670, guid: e373f3e7cb81856418a225d798255afa,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -221,6 +211,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6168688126404197674, guid: e373f3e7cb81856418a225d798255afa,
+        type: 3}
+      propertyPath: m_Name
+      value: Airplane Crash
+      objectReference: {fileID: 0}
+    - target: {fileID: 6168688126404197674, guid: e373f3e7cb81856418a225d798255afa,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e373f3e7cb81856418a225d798255afa, type: 3}
 --- !u!1 &1932552220383655039 stripped
@@ -242,11 +242,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7731285923430505165}
     m_Modifications:
-    - target: {fileID: 748107487360155480, guid: 917e0675d5b82954ba6ee374508d7c5a,
-        type: 3}
-      propertyPath: m_Name
-      value: Airplane CenterOfMass
-      objectReference: {fileID: 0}
     - target: {fileID: 748107487360155476, guid: 917e0675d5b82954ba6ee374508d7c5a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -302,10 +297,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 748107487360155480, guid: 917e0675d5b82954ba6ee374508d7c5a,
+        type: 3}
+      propertyPath: m_Name
+      value: Airplane CenterOfMass
+      objectReference: {fileID: 0}
     - target: {fileID: 748107487360155479, guid: 917e0675d5b82954ba6ee374508d7c5a,
         type: 3}
       propertyPath: pitchSpeed
       value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 748107487360155479, guid: 917e0675d5b82954ba6ee374508d7c5a,
+        type: 3}
+      propertyPath: maxThrust
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 1765538573, guid: 917e0675d5b82954ba6ee374508d7c5a, type: 3}
       propertyPath: Debugs

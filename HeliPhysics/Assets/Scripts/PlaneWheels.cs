@@ -36,6 +36,9 @@ public class PlaneWheels : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position + raycastStartOffset, relativeRaycastDirection, out hit, raycastLength))
         {
+            // Ignore Collision with water
+            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Water")) return;
+
             //Normal Force
             Vector3 normalForce = CalculateNormal(hit);
 

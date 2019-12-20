@@ -47,22 +47,28 @@ public class Landing : MonoBehaviour, IState
 
     public void Tick()
     {
-        float relY = transform.GetChild(0).position.y - pointB.transform.position.y;
-        //Debug.Log("Landing: " + relY);
-
-        if (relY < tipDownTriggerDistance)
-        {
-            targetPitch += Time.deltaTime * tipDownSpeed;
-            targetPitch = Mathf.Min(targetPitch, tipDownMax);
-        }
-
-        LevelOut();
+        TipDown();
         MakeParallel();
+        LevelOut();
 
         if (_enabled == true && _physics._velocity.magnitude <= 0.2f)
         {
             StartCoroutine("CrashSelfRoutine");
             _enabled = false;
+        }
+    }
+
+    private void TipDown()
+    {
+        float relY = transform.GetChild(0).position.y - pointB.transform.position.y;
+
+        if (relY < tipDownTriggerDistance)
+        {
+            targetPitch += Time.deltaTime * tipDownSpeed;
+            targetPitch = Mathf.Min(targetPitch, tipDownMax);
+
+            //if (targetPitch == tipDownMax && _physics._horizontalVelocity.magnitude > 0.5f)
+            //    _physics._horizontalVelocity -= _physics._horizontalVelocity.normalized * 0.01f;
         }
     }
 

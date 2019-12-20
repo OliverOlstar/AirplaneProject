@@ -15,7 +15,7 @@ public class FlyToTarget : MonoBehaviour, IState
     [Space]
     [SerializeField] private float pitchMult = 0.01f;
     [SerializeField] private float yawnSpeed;
-    [SerializeField] private float rollSpeed = 1;
+    //[SerializeField] private float rollSpeed = 1;
     [SerializeField] private float rollSpeedParallel = 1;
 
     [SerializeField] private float targetPitch = 0;
@@ -120,13 +120,14 @@ public class FlyToTarget : MonoBehaviour, IState
 
         if (disFromPointB > -stripBuffer)
         {
-            float targetRelAngleTemp = Mathf.Min(targetRelAngle + disFromPointB / 15, 70);
+            float targetRelAngleTemp = Mathf.Min(targetRelAngle + Mathf.Pow(disFromPointB / 100, 2) * 2, 70);
+            Debug.Log("dis " + Mathf.Pow(disFromPointB / 100, 2) * 2);
 
-            float targetAngleMax = (targetRelAngleTemp + targetAngleBuffer);
-            float targetAngleMin = (targetRelAngleTemp - targetAngleBuffer);
+            float targetAngleMax = targetRelAngleTemp + targetAngleBuffer;
+            float targetAngleMin = targetRelAngleTemp - targetAngleBuffer;
             float Left = dotRight > 0 ? -1 : 1;
             relRotY *= Left;
-            Debug.Log(relRotY);
+            //Debug.Log(relRotY);
             if (relRotY < targetAngleMax && relRotY > targetAngleMin)
             {
                 Debug.Log("In Range " + Left);
@@ -149,11 +150,11 @@ public class FlyToTarget : MonoBehaviour, IState
             Debug.Log("Parallel " + Vector3.Dot(transform.GetChild(0).forward, pointB.transform.forward));
             // Become Parallel
 
-            if (relRotY < -6)
+            if (relRotY < -5)
             {
                 targetRoll = -Mathf.Pow(Vector3.Dot(transform.GetChild(0).forward, pointB.transform.forward), 2) * rollSpeedParallel;
             }
-            else if (relRotY > 6)
+            else if (relRotY > 5)
             {
                 targetRoll = Mathf.Pow(Vector3.Dot(transform.GetChild(0).forward, pointB.transform.forward), 2) * rollSpeedParallel;
             }
@@ -172,6 +173,7 @@ public class FlyToTarget : MonoBehaviour, IState
             }
         }
 
+        // Prevent Over rolling
         targetRoll = Mathf.Clamp(targetRoll, -rollClamp, rollClamp);
     }
 
