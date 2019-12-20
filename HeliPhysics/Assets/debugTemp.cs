@@ -13,13 +13,14 @@ public class debugTemp : MonoBehaviour
         float relRotY = Vector3.SignedAngle(transform.forward, other.transform.forward, Vector3.up);
         // Debug.Log(relRotY);
 
+        float dotRight = Vector3.Dot(directionBetween.normalized, other.transform.right);
         //float dotLeft = Vector3.Dot(directionBetween.normalized, -transform.right);
 
         float projection = Vector3.Project(directionBetween, transform.right).magnitude;
 
-        //if (dotRight > 0) Debug.Log("Left");
-        //else Debug.Log("Right");
-        Debug.Log(relRotY);
+        if (dotRight > 0) Debug.Log("Left");
+        else Debug.Log("Right");
+        //Debug.Log(relRotY);
 
         Gizmos.DrawLine(transform.position, transform.position + transform.forward * 5f);
     }

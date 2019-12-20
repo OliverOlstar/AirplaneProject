@@ -107,38 +107,40 @@ public class FlyToTarget : MonoBehaviour, IState
         // Rotate to be parallel to the landing strip
         //float myRot = transform.GetChild(0).eulerAngles.y;
 
-
         //Debug.Log(transform.GetChild(0).eulerAngles.y + " r|r " + pointB.transform.eulerAngles.y + " | Rel: " + relRotY);
-
 
         // If outside of runway turn onto runway
         Vector3 directionBetween = transform.GetChild(0).position - pointB.transform.position;
-        float disFromPointA = Vector3.Project(directionBetween, pointB.transform.right).magnitude - (pointB.stripWidth / 2);
-        disFromPointA = Mathf.Min(disFromPointA, 500);
+        float disFromPointB = Vector3.Project(directionBetween, pointB.transform.right).magnitude - (pointB.stripWidth / 2);
+        disFromPointB = Mathf.Min(disFromPointB, 500);
 
         float dotRight = Vector3.Dot(directionBetween.normalized, pointB.transform.right);
 
         float relRotY = Vector3.SignedAngle(transform.GetChild(0).forward, -pointB.transform.forward, Vector3.up);
 
-        if (disFromPointA > -stripBuffer)
+        if (disFromPointB > -stripBuffer)
         {
-            float targetAngleMax = (targetRelAngle + targetAngleBuffer);
-            float targetAngleMin = (targetRelAngle - targetAngleBuffer);
+            float targetRelAngleTemp = Mathf.Min(targetRelAngle + disFromPointB / 15, 70);
+
+            float targetAngleMax = (targetRelAngleTemp + targetAngleBuffer);
+            float targetAngleMin = (targetRelAngleTemp - targetAngleBuffer);
             float Left = dotRight > 0 ? -1 : 1;
             relRotY *= Left;
-
+            Debug.Log(relRotY);
             if (relRotY < targetAngleMax && relRotY > targetAngleMin)
             {
+                Debug.Log("In Range " + Left);
                 // In Range
                 targetRoll = 0;
             }
             else
             {
+                Debug.Log("Out of Range " + Left);
                 // Out of Range
-                if (relRotY > targetRelAngle)
+                if (relRotY > targetRelAngleTemp)
                     targetRoll = preParallelingRoll * Left;
                 else
-                    targetRoll = -preParallelingRoll * Left;
+                    targetRoll = preParallelingRoll * -Left;
             }
         }
         else
@@ -147,11 +149,11 @@ public class FlyToTarget : MonoBehaviour, IState
             Debug.Log("Parallel " + Vector3.Dot(transform.GetChild(0).forward, pointB.transform.forward));
             // Become Parallel
 
-            if (relRotY < -4)
+            if (relRotY < -6)
             {
                 targetRoll = -Mathf.Pow(Vector3.Dot(transform.GetChild(0).forward, pointB.transform.forward), 2) * rollSpeedParallel;
             }
-            else if (relRotY > 4)
+            else if (relRotY > 6)
             {
                 targetRoll = Mathf.Pow(Vector3.Dot(transform.GetChild(0).forward, pointB.transform.forward), 2) * rollSpeedParallel;
             }

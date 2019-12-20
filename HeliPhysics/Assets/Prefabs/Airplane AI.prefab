@@ -76,14 +76,14 @@ MonoBehaviour:
   pointB: {fileID: 0}
   _enabled: 0
   pitchMult: 0.05
-  yawnSpeed: 1
+  yawnSpeed: 30
   rollSpeed: 50
-  rollSpeedParallel: 0.2
+  rollSpeedParallel: 0.3
   targetPitch: 0
   targetRoll: 0
-  preParallelingRoll: 0.15
+  preParallelingRoll: 0.1
   targetRelAngle: 12
-  targetAngleBuffer: 3
+  targetAngleBuffer: 4
   rollClamp: 0.4
   stripBuffer: 2
   decendStartDistance: 700
@@ -279,11 +279,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6168688126404197675, guid: b1203d347ef101744816fd6fdf205efd,
-        type: 3}
-      propertyPath: _target
-      value: 
-      objectReference: {fileID: 8857060703963378805}
     - target: {fileID: 721730228, guid: b1203d347ef101744816fd6fdf205efd, type: 3}
       propertyPath: actualPlane
       value: 
@@ -292,6 +287,11 @@ PrefabInstance:
       propertyPath: crashedPlane
       value: 
       objectReference: {fileID: 6053047649598864109}
+    - target: {fileID: 6168688126404197675, guid: b1203d347ef101744816fd6fdf205efd,
+        type: 3}
+      propertyPath: _target
+      value: 
+      objectReference: {fileID: 8857060703963378805}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1203d347ef101744816fd6fdf205efd, type: 3}
 --- !u!4 &6802363168041744695 stripped

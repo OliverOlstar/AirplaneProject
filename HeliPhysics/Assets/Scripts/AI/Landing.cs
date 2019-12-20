@@ -68,10 +68,11 @@ public class Landing : MonoBehaviour, IState
 
     private void MakeParallel()
     {
-        float relRotY = transform.GetChild(0).eulerAngles.y - pointB.transform.eulerAngles.y + 180;
+        //float relRotY = transform.GetChild(0).eulerAngles.y - pointB.transform.eulerAngles.y + 180;
+        float relRotY = Vector3.SignedAngle(transform.GetChild(0).forward, -pointB.transform.forward, Vector3.up);
 
         //Rotate to be parallel to the landing strip
-        if (relRotY < 0)
+        if (relRotY > 0)
         {
             _controller.yawn = -Vector3.Dot(transform.GetChild(0).forward, pointB.transform.forward) * yawnSpeed;
         }
