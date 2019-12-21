@@ -116,23 +116,25 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9972}
     - Class: 114
-      Script: {instanceID: 10070}
+      Script: {instanceID: 10068}
     - Class: 114
-      Script: {instanceID: 10080}
+      Script: {instanceID: 10078}
     - Class: 114
-      Script: {instanceID: 10108}
+      Script: {instanceID: 10106}
     - Class: 114
-      Script: {instanceID: 10234}
+      Script: {instanceID: 10232}
+    - Class: 114
+      Script: {instanceID: 10250}
     - Class: 114
       Script: {instanceID: 10252}
     - Class: 114
-      Script: {instanceID: 10254}
+      Script: {instanceID: 10304}
     - Class: 114
-      Script: {instanceID: 10306}
+      Script: {instanceID: 10368}
     - Class: 114
-      Script: {instanceID: 10370}
+      Script: {instanceID: 10372}
     - Class: 114
-      Script: {instanceID: 10374}
+      Script: {instanceID: 10542}
     - Class: 114
       Script: {instanceID: 10634}
     - Class: 114
@@ -165,8 +167,6 @@ ScriptsOnlyBuild:
       Script: {instanceID: 11546}
     - Class: 114
       Script: {instanceID: 11618}
-    - Class: 114
-      Script: {instanceID: 18678}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -338,12 +338,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_InputField
-  - hash:
-      serializedVersion: 2
-      Hash: c2875bff8178612f5236cbcdb6628407
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: debugTemp
   - hash:
       serializedVersion: 2
       Hash: 7ab0e790220bdca831fdd886b339039d
@@ -520,6 +514,12 @@ ScriptsOnlyBuild:
     className: TMP_Asset
   - hash:
       serializedVersion: 2
+      Hash: db2546f9edf804939e6eb94fca93cf1e
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: controlsUI
+  - hash:
+      serializedVersion: 2
       Hash: d4020bafcd3ccbb5601a6e6c8ac78be0
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -592,7 +592,7 @@ ScriptsOnlyBuild:
     className: RawImage
   - hash:
       serializedVersion: 2
-      Hash: 031490f10fe48c3cbcafedcdd4cc1c5d
+      Hash: 4ecb54d808f658483f914c944b10dbc1
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: AISpawner
@@ -842,12 +842,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
-  - hash:
-      serializedVersion: 2
-      Hash: db2546f9edf804939e6eb94fca93cf1e
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: controlsUI
   platform: 5
   scenePathNames:
   - Assets/Scenes/The Game Scene.unity

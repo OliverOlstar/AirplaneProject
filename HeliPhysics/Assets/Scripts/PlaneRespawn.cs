@@ -30,6 +30,10 @@ public class PlaneRespawn : MonoBehaviour
             fuelUI.transform.parent.gameObject.SetActive(false);
             Cursor.lockState = CursorLockMode.None;
         }
+        if (planeCrash.activeSelf && Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            ClickReset();
+        }
     }
 
     public void ClickReset()

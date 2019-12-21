@@ -35,7 +35,7 @@ public class PlayerCamera : MonoBehaviour
         _LocalRotation.y = _ParentTransform.eulerAngles.x;
 
         //Locking cursor
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
 
         //Setting camera distance
         _TargetLocalPosition = new Vector3(-OffSetLeft, 0f, CameraDistance * -1f);
@@ -54,6 +54,19 @@ public class PlayerCamera : MonoBehaviour
         //Actual Camera Transformations
         Quaternion TargetQ = Quaternion.Euler(_LocalRotation.y, _LocalRotation.x, 0);
         _ParentTransform.rotation = Quaternion.Lerp(_ParentTransform.rotation, TargetQ, Time.deltaTime * TurnDampening);
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+            Cursor.lockState = CursorLockMode.None;
+        else if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            StartCoroutine(lockMouseDelay());
+        }
+    }
+
+    private IEnumerator lockMouseDelay()
+    {
+        yield return new WaitForSeconds(0.1f);
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void DefaultCameraMovement()

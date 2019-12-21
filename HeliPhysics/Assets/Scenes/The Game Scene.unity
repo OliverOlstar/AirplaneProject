@@ -9502,12 +9502,12 @@ PrefabInstance:
     - target: {fileID: 4268538285504463162, guid: 7b01320e9008fe74584d32f97c2b67da,
         type: 3}
       propertyPath: spawnRate
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4268538285504463162, guid: 7b01320e9008fe74584d32f97c2b67da,
         type: 3}
       propertyPath: spawnRateVariation
-      value: 1
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b01320e9008fe74584d32f97c2b67da, type: 3}
@@ -9531,7 +9531,7 @@ PrefabInstance:
     - target: {fileID: 4766657839587240976, guid: f57d3d8131baae344b885a0309d8d9b5,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1086.7
+      value: 1071.6
       objectReference: {fileID: 0}
     - target: {fileID: 4766657839587240976, guid: f57d3d8131baae344b885a0309d8d9b5,
         type: 3}
