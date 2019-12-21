@@ -89,7 +89,6 @@ public class TakeOff : MonoBehaviour, IState
 
     private void StayOnLandingStrip()
     {
-        //Rotate to be parallel to the landing strip
         float relRotY = Vector3.SignedAngle(transform.GetChild(0).forward, pointA.transform.forward, Vector3.up);
 
         //If outside of runway turn onto runway

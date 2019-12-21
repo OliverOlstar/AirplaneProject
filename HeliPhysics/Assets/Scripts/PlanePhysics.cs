@@ -47,42 +47,51 @@ public class PlanePhysics : MonoBehaviour
 
     void Update()
     {
+        // Prevent physics if framerate is too low
         if (Time.deltaTime >= 0.5f) return;
 
+        // Horizontal - Thrust
         _horizontalVelocity += transform.forward * thrust * Time.deltaTime;
         _horizontalVelocity.y = 0;
 
+        // Horizontal - Drag
         CalculateHorizontalDrag();
         _horizontalVelocity += _horizontalDrag * Time.deltaTime;
 
+        // Vertical - Gravity
         _verticalVelocity += _gravity * Time.deltaTime;
 
+        // Vertical - Lift
         CalculateLift();
         _verticalVelocity += _lift * Time.deltaTime;
 
+        // Vertical - Drag
         CalculateVerticalDrag();
         _verticalVelocity += _verticalDrag * Time.deltaTime;
 
+        // Both - Lift
         CalculateVerticalEffectOnHorizontal();
         _horizontalVelocity += _verticalEffectOnHorizontal * _horizontalVelocity.normalized * Time.deltaTime;
 
+        // Horizontal - Flatten to plane's forward direction
         Vector3 forward = transform.forward;
         forward.y = 0;
         forward.Normalize();
         _horizontalVelocity = _horizontalVelocity.magnitude * forward;
 
-        //Calculate Angular;
+        //Calculate Angular
         _angluarVelocity = Vector3.Project(-transform.right, Vector3.up) * Time.deltaTime * _AngluarInfluence * _horizontalVelocity.magnitude;
 
         _angluarVelocity += CalculateTurbulance();
 
+        // Wheels
         _velocity = _verticalVelocity + _horizontalVelocity;
-        //TODO Check with wheels
 
         CalculateWheelsForces();
         _verticalVelocity.y = _velocity.y;
         _horizontalVelocity = new Vector3(_velocity.x, 0, _velocity.z);
 
+        // Apply Forces
         if (_velocity.magnitude > 0.08f)
             transform.position += _velocity * Time.deltaTime * 5;
 
@@ -124,7 +133,6 @@ public class PlanePhysics : MonoBehaviour
         float quadraticValue = GetQuadraticCurveValue(angle01, _bestLiftAngle, -2f, -1.1f, 1, 1, 0.1f, 0);
         float liftMag = quadraticValue * _liftMax * (_horizontalVelocity.magnitude * _liftMultH + _liftMinH);
 
-        //Debug.Log(transform.localEulerAngles.x + " | Angle01: " + angle01 + " | LiftMag: " + liftMag);
         _lift = Mathf.Abs(transform.up.y) * liftMag * Vector3.up;
     }
 
@@ -176,10 +184,9 @@ public class PlanePhysics : MonoBehaviour
 
     private void CalculateVerticalEffectOnHorizontal()
     {
-        float mult = (transform.forward.y < 0 ? _VoHMultDown : _VoHMultUp);
+        float mult = transform.forward.y < 0 ? _VoHMultDown : _VoHMultUp;
         float angleMult = GetQuadraticCurveValue(transform.forward.y, 0.5f, 0, 0.5f, 1, 1, 1.5f, 0);
 
-        // TODO Make a thresh hold or porabla rather than instant
         if (transform.forward.y < 0.7f && transform.forward.y > -0.85f)
         {
             //Add Horizontal based on vertical velocity
@@ -190,6 +197,5 @@ public class PlanePhysics : MonoBehaviour
             //Reduce Horizontal if plane is facing up
             _verticalEffectOnHorizontal = -_horizontalVelocity.magnitude * 0.999f;
         }
-
     }
 }

@@ -39,12 +39,13 @@ public class PlaneWheels : MonoBehaviour
             // Ignore Collision with water
             if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Water")) return;
 
-            //Normal Force
+            // Normal Force
             Vector3 normalForce = CalculateNormal(hit);
 
-            //Friction
+            // Friction
             normalForce += CalculateFriction() * Time.deltaTime;
 
+            // Apply Forces
             physics._angluarVelocity += rotation * normalForce.magnitude * Time.deltaTime * rotationMult;
             physics._velocity += normalForce;
         }
@@ -77,8 +78,6 @@ public class PlaneWheels : MonoBehaviour
             return -physics._velocity;
         else
             return -friction;
-
-        // TODO Add Cut off at small enough number
     }
 
     private void OnDrawGizmos()

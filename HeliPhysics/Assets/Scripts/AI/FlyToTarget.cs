@@ -91,7 +91,6 @@ public class FlyToTarget : MonoBehaviour, IState
     private void PitchUpToTarget()
     {
         float relHeight = (transform.GetChild(0).position.y - pointB.transform.position.y - RelHeightTargetHeight) * relHeightMult;
-        //Debug.Log(relHeight);
         targetPitch = Mathf.Clamp(-relHeight, -relHeightPitchClamp, relHeightPitchClamp);
     }
 
@@ -104,39 +103,32 @@ public class FlyToTarget : MonoBehaviour, IState
 
     private void StayOnLandingStrip()
     {
-        // Rotate to be parallel to the landing strip
-        //float myRot = transform.GetChild(0).eulerAngles.y;
-
-        //Debug.Log(transform.GetChild(0).eulerAngles.y + " r|r " + pointB.transform.eulerAngles.y + " | Rel: " + relRotY);
-
-        // If outside of runway turn onto runway
         Vector3 directionBetween = transform.GetChild(0).position - pointB.transform.position;
         float disFromPointB = Vector3.Project(directionBetween, pointB.transform.right).magnitude - (pointB.stripWidth / 2);
         disFromPointB = Mathf.Min(disFromPointB, 500);
 
         float dotRight = Vector3.Dot(directionBetween.normalized, pointB.transform.right);
-
         float relRotY = Vector3.SignedAngle(transform.GetChild(0).forward, -pointB.transform.forward, Vector3.up);
 
+        // If outside of runway turn onto runway
         if (disFromPointB > -stripBuffer)
         {
             float targetRelAngleTemp = Mathf.Min(targetRelAngle + Mathf.Pow(disFromPointB / 100, 2) * 2, 70);
-            Debug.Log("dis " + Mathf.Pow(disFromPointB / 100, 2) * 2);
+            //Debug.Log("dis " + Mathf.Pow(disFromPointB / 100, 2) * 2);
 
             float targetAngleMax = targetRelAngleTemp + targetAngleBuffer;
             float targetAngleMin = targetRelAngleTemp - targetAngleBuffer;
+
             float Left = dotRight > 0 ? -1 : 1;
             relRotY *= Left;
-            //Debug.Log(relRotY);
+
             if (relRotY < targetAngleMax && relRotY > targetAngleMin)
             {
-                Debug.Log("In Range " + Left);
                 // In Range
                 targetRoll = 0;
             }
             else
             {
-                Debug.Log("Out of Range " + Left);
                 // Out of Range
                 if (relRotY > targetRelAngleTemp)
                     targetRoll = preParallelingRoll * Left;
@@ -146,27 +138,16 @@ public class FlyToTarget : MonoBehaviour, IState
         }
         else
         {
-            //relRotY = Mathf.Abs(relRotY);
-            Debug.Log("Parallel " + Vector3.Dot(transform.GetChild(0).forward, pointB.transform.forward));
             // Become Parallel
-
-            if (relRotY < -5)
+            if (relRotY < -5 || relRotY > 5)
             {
-                targetRoll = -Mathf.Pow(Vector3.Dot(transform.GetChild(0).forward, pointB.transform.forward), 2) * rollSpeedParallel;
-            }
-            else if (relRotY > 5)
-            {
-                targetRoll = Mathf.Pow(Vector3.Dot(transform.GetChild(0).forward, pointB.transform.forward), 2) * rollSpeedParallel;
+                targetRoll = -Mathf.Pow(relRotY, 2) * rollSpeedParallel;
             }
             else
             {
-                if (relRotY > 0)
+                if (relRotY != 0)
                 {
-                    _controller.yawn = -Vector3.Dot(transform.GetChild(0).forward, pointB.transform.forward) * yawnSpeed;
-                }
-                else if (relRotY != 0)
-                {
-                    _controller.yawn = Vector3.Dot(transform.GetChild(0).forward, pointB.transform.forward) * yawnSpeed;
+                    _controller.yawn = -relRotY * yawnSpeed;
                 }
 
                 targetRoll = 0;
@@ -179,31 +160,31 @@ public class FlyToTarget : MonoBehaviour, IState
 
     private void AvoidObsticals()
     {
-        bool[] hits = new bool[2];
+        bool leftHit = false, rightHit = false;
         Vector3 forward = _physics._velocity.normalized;
         float raycastDistance = ODDistance + _physics._horizontalVelocity.magnitude * ODHorizontalVelMult;
         RaycastHit hit;
 
         if (Physics.Raycast(transform.GetChild(0).position + transform.GetChild(0).right * 2.7f, forward, out hit, raycastDistance))
         {
-            hits[0] = true;
+            rightHit = true;
         }
         if (Physics.Raycast(transform.GetChild(0).position - transform.GetChild(0).right * 2.7f, forward, out hit, raycastDistance))
         {
-            hits[1] = true;
+            leftHit = true;
         }
 
-        if (hits[0] && !hits[1])
+        if (rightHit && !leftHit)
         {
             // Go Soft left
             targetRoll = -0.5f;
         }
-        else if (hits[1] && !hits[0])
+        else if (leftHit && !rightHit)
         {
             // Go Soft right
             targetRoll = 0.5f;
         }
-        else if (hits[0] || hits[1])
+        else if (rightHit || leftHit)
         {
             // All hit check if it can do a soft left turn
             Vector3 rayDirection = (forward + transform.GetChild(0).right * 0.75f).normalized;

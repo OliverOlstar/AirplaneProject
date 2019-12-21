@@ -75,15 +75,6 @@ public class PlaneController : MonoBehaviour
             transform.Rotate(Vector3.forward, Time.deltaTime * rollSpeed * -roll * Mathf.Min(physics._velocity.magnitude / 5 - speedNeededToRoll / 5, 1));
     }
 
-    private void LerpRotation()
-    {
-        _LocalRotation += Time.deltaTime * yawnSpeed * pitch * Vector3.right;
-        _LocalRotation += Time.deltaTime * rollSpeed * -roll * Vector3.forward;
-
-        Quaternion TargetQ = Quaternion.Euler(_LocalRotation);
-        transform.localRotation = Quaternion.Slerp(transform.localRotation, TargetQ, Time.deltaTime * TurnDampening);
-    }
-
     public Vector3 RotatePointAroundPivot(Vector3 point, Vector3 pivot, Vector3 angles)
     {
         Vector3 dir = point - pivot; // get point direction relative to pivot
