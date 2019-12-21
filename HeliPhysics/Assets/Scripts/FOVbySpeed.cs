@@ -11,7 +11,7 @@ public class FOVbySpeed : MonoBehaviour
     [SerializeField] private float velSubtract;
 
     private Camera _camera;
-
+    // TODO CAMERA SHAKE BY SPEED
     void Start()
     {
         _camera = GetComponent<Camera>();

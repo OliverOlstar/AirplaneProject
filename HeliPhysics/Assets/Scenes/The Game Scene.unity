@@ -76,7 +76,7 @@ LightmapSettings:
     m_PVRSampling: 1
     m_PVRDirectSampleCount: 32
     m_PVRSampleCount: 500
-    m_PVRBounces: 2
+    m_PVRBounces: 0
     m_PVREnvironmentSampleCount: 500
     m_PVREnvironmentReferencePointCount: 2048
     m_PVRFilteringMode: 2
@@ -3440,7 +3440,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 8e-45, z: 0, w: 1.7e-44}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -4348,7 +4348,7 @@ PrefabInstance:
     - target: {fileID: 7910095682688564986, guid: e9f1987ed39e3d44a920fa8c41042dbb,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1300.1282
+      value: 1303.88
       objectReference: {fileID: 0}
     - target: {fileID: 7910095682688564986, guid: e9f1987ed39e3d44a920fa8c41042dbb,
         type: 3}
@@ -7827,7 +7827,7 @@ PrefabInstance:
     - target: {fileID: 7910095682688564986, guid: e9f1987ed39e3d44a920fa8c41042dbb,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2500.0916
+      value: 2503.1
       objectReference: {fileID: 0}
     - target: {fileID: 7910095682688564986, guid: e9f1987ed39e3d44a920fa8c41042dbb,
         type: 3}
@@ -9523,6 +9523,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Spawner
       objectReference: {fileID: 0}
+    - target: {fileID: 4766657839587240991, guid: f57d3d8131baae344b885a0309d8d9b5,
+        type: 3}
+      propertyPath: resetUI
+      value: 
+      objectReference: {fileID: 2037515155}
+    - target: {fileID: 4766657839587240991, guid: f57d3d8131baae344b885a0309d8d9b5,
+        type: 3}
+      propertyPath: fuelUI
+      value: 
+      objectReference: {fileID: 6710658}
+    - target: {fileID: 4766657839587240991, guid: f57d3d8131baae344b885a0309d8d9b5,
+        type: 3}
+      propertyPath: cameraPivot
+      value: 
+      objectReference: {fileID: 1230120095}
+    - target: {fileID: 4766657839587240991, guid: f57d3d8131baae344b885a0309d8d9b5,
+        type: 3}
+      propertyPath: cameraFOV
+      value: 
+      objectReference: {fileID: 1054876675}
     - target: {fileID: 4766657839587240976, guid: f57d3d8131baae344b885a0309d8d9b5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9578,25 +9598,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4766657839587240991, guid: f57d3d8131baae344b885a0309d8d9b5,
-        type: 3}
-      propertyPath: resetUI
-      value: 
-      objectReference: {fileID: 2037515155}
-    - target: {fileID: 4766657839587240991, guid: f57d3d8131baae344b885a0309d8d9b5,
-        type: 3}
-      propertyPath: fuelUI
-      value: 
-      objectReference: {fileID: 6710658}
-    - target: {fileID: 4766657839587240991, guid: f57d3d8131baae344b885a0309d8d9b5,
-        type: 3}
-      propertyPath: cameraPivot
-      value: 
-      objectReference: {fileID: 1230120095}
-    - target: {fileID: 4766657839587240991, guid: f57d3d8131baae344b885a0309d8d9b5,
-        type: 3}
-      propertyPath: cameraFOV
-      value: 
-      objectReference: {fileID: 1054876675}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f57d3d8131baae344b885a0309d8d9b5, type: 3}
