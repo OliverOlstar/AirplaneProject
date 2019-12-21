@@ -9,8 +9,6 @@ public class AISpawner : MonoBehaviour
 
     [SerializeField] private GameObject planeAIPrefab;
 
-    [SerializeField] private bool onlyOne;
-
     private LandingStrip[] landingStrips;
 
     // Start is called before the first frame update
@@ -41,8 +39,6 @@ public class AISpawner : MonoBehaviour
             }
 
             SpawnAIPlane(A, B);
-
-            if (onlyOne) break;
         }
     }
 

@@ -113,7 +113,7 @@ public class FlyToTarget : MonoBehaviour, IState
         // If outside of runway turn onto runway
         if (disFromPointB > -stripBuffer)
         {
-            float targetRelAngleTemp = Mathf.Min(targetRelAngle + Mathf.Pow(disFromPointB / 100, 2) * 2, 70);
+            float targetRelAngleTemp = Mathf.Min(targetRelAngle + Mathf.Pow(disFromPointB / 100, 2) * 2, 90);
             //Debug.Log("dis " + Mathf.Pow(disFromPointB / 100, 2) * 2);
 
             float targetAngleMax = targetRelAngleTemp + targetAngleBuffer;
@@ -139,15 +139,15 @@ public class FlyToTarget : MonoBehaviour, IState
         else
         {
             // Become Parallel
-            if (relRotY < -5 || relRotY > 5)
+            if (disFromPointB < -8)
             {
-                targetRoll = -Mathf.Pow(relRotY, 2) * rollSpeedParallel;
+                targetRoll = -Mathf.Pow(relRotY / 2, 2) * rollSpeedParallel;
             }
             else
             {
                 if (relRotY != 0)
                 {
-                    _controller.yawn = -relRotY * yawnSpeed;
+                    _controller.yawn = relRotY * yawnSpeed;
                 }
 
                 targetRoll = 0;
