@@ -31,5 +31,8 @@ public class LandingStrip : MonoBehaviour
         Gizmos.DrawLine(transform.position - disForward + disRight, transform.position + disForward + disRight);
         Gizmos.DrawLine(transform.position + disForward - disRight, transform.position + disForward + disRight);
         Gizmos.DrawLine(transform.position - disForward - disRight, transform.position - disForward + disRight);
+
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawLine(transform.position + transform.up, transform.position + transform.up + transform.forward * 50);
     }
 }

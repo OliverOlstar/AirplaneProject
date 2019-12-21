@@ -36,12 +36,16 @@ public class PlaneWheels : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position + raycastStartOffset, relativeRaycastDirection, out hit, raycastLength))
         {
-            //Normal Force
+            // Ignore Collision with water
+            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Water")) return;
+
+            // Normal Force
             Vector3 normalForce = CalculateNormal(hit);
 
-            //Friction
+            // Friction
             normalForce += CalculateFriction() * Time.deltaTime;
 
+            // Apply Forces
             physics._angluarVelocity += rotation * normalForce.magnitude * Time.deltaTime * rotationMult;
             physics._velocity += normalForce;
         }
@@ -49,6 +53,9 @@ public class PlaneWheels : MonoBehaviour
 
     private Vector3 CalculateNormal(RaycastHit pHit)
     {
+        //If to far from down direction ignore wheel collision (stops sticking to side of wall)
+        if (Vector3.Dot(pHit.normal, Vector3.down) > 0.65f) return Vector3.zero;
+
         float normalMult = bounciness + -pHit.distance + raycastExtraLength;
         if (normalMult < 0)
         {
@@ -71,8 +78,6 @@ public class PlaneWheels : MonoBehaviour
             return -physics._velocity;
         else
             return -friction;
-
-        // TODO Add Cut off at small enough number
     }
 
     private void OnDrawGizmos()

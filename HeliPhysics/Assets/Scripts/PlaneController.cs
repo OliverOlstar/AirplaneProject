@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlaneController : MonoBehaviour
 {
     private PlanePhysics physics;
+    private Fuel fuel;
 
     [SerializeField] private float yawnSpeed = 5;
     [SerializeField] private float pitchSpeed = 5;
@@ -23,9 +24,10 @@ public class PlaneController : MonoBehaviour
     [SerializeField] private float minThrust = 0;
     [SerializeField] private float thrustRampupSpeed = 1;
 
-    [HideInInspector] public float pitch;
-    [HideInInspector] public float yawn;
-    [HideInInspector] public float roll;
+    [Header("Inputs")]
+    public float pitch;
+    public float yawn;
+    public float roll;
     public bool thrust;
     private bool thrusting = false;
 
@@ -33,10 +35,20 @@ public class PlaneController : MonoBehaviour
     {
         physics = GetComponent<PlanePhysics>();
         _LocalRotation = transform.localEulerAngles;
+        fuel = GetComponentInParent<Fuel>();
     }
 
     void Update()
     {
+        // Fuel
+        if (fuel)
+        {
+            if (fuel.GetFuel() <= 0)
+                thrust = false;
+            else
+                if (thrusting) fuel.ModifyFuel(-Time.deltaTime);
+        }
+
         //Change Effect based on current speed
         Rotation();
     }
@@ -47,7 +59,7 @@ public class PlaneController : MonoBehaviour
         if (thrust != thrusting)
         {
             StopCoroutine("rampupThrust");
-            StartCoroutine("rampupThrust", (thrust ? 1 : -1));
+            StartCoroutine("rampupThrust", thrust ? 1 : -1);
             thrusting = thrust;
         }
 
@@ -55,21 +67,12 @@ public class PlaneController : MonoBehaviour
         transform.Rotate(Vector3.up, Time.deltaTime * yawnSpeed * yawn * Mathf.Min(physics._horizontalVelocity.magnitude, 1));
 
         //Elevators - Pitch
-        if (physics._horizontalVelocity.magnitude > speedNeededToPitch)
-            transform.Rotate(Vector3.right, Time.deltaTime * pitchSpeed * pitch * Mathf.Min(physics._horizontalVelocity.magnitude / 5 - speedNeededToPitch / 5, 1));
+        if (physics._velocity.magnitude > speedNeededToPitch)
+            transform.Rotate(Vector3.right, Time.deltaTime * pitchSpeed * pitch * Mathf.Min(physics._velocity.magnitude / 5 - speedNeededToPitch / 5, 1));
 
         //Ailerons - Roll
-        if (physics._horizontalVelocity.magnitude > speedNeededToRoll)
-            transform.Rotate(Vector3.forward, Time.deltaTime * rollSpeed * -roll * Mathf.Min(physics._horizontalVelocity.magnitude / 5 - speedNeededToRoll / 5, 1));
-    }
-
-    private void LerpRotation()
-    {
-        _LocalRotation += Time.deltaTime * yawnSpeed * pitch * Vector3.right;
-        _LocalRotation += Time.deltaTime * rollSpeed * -roll * Vector3.forward;
-
-        Quaternion TargetQ = Quaternion.Euler(_LocalRotation);
-        transform.localRotation = Quaternion.Slerp(transform.localRotation, TargetQ, Time.deltaTime * TurnDampening);
+        if (physics._velocity.magnitude > speedNeededToRoll)
+            transform.Rotate(Vector3.forward, Time.deltaTime * rollSpeed * -roll * Mathf.Min(physics._velocity.magnitude / 5 - speedNeededToRoll / 5, 1));
     }
 
     public Vector3 RotatePointAroundPivot(Vector3 point, Vector3 pivot, Vector3 angles)
