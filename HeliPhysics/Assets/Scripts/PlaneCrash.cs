@@ -9,7 +9,7 @@ public class PlaneCrash : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Default") || other.gameObject.layer == LayerMask.NameToLayer("Ignore Raycast"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Default") /* || other.gameObject.layer == LayerMask.NameToLayer("Ignore Raycast")*/)
         {
             Crashed();
         }

@@ -84,7 +84,7 @@ GameObject:
   - component: {fileID: 3818411697791819342}
   - component: {fileID: 3818411697791819329}
   - component: {fileID: 3818411697791819328}
-  m_Layer: 8
+  m_Layer: 2
   m_Name: FuelCollectable
   m_TagString: Untagged
   m_Icon: {fileID: 0}

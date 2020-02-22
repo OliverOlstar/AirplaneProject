@@ -1,5 +1,17 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1140165345235980518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6053047649598864109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da99c5c3eb0c5174388986df6049be35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8109670126012411586
 GameObject:
   m_ObjectHideFlags: 0
@@ -83,7 +95,7 @@ MonoBehaviour:
   preParallelingRoll: 0.15
   targetRelAngle: 16
   targetAngleBuffer: 4
-  rollClamp: 0.3
+  rollClamp: 0.2
   stripBuffer: 2
   decendStartDistance: 700
   leaveStateDistance: 400
@@ -109,8 +121,8 @@ MonoBehaviour:
   yawnSpeed: 0.5
   rollSpeed: 0.8
   pitchSpeed: 0.03
-  tipDownTriggerDistance: 16
-  tipDownSpeed: 7
+  tipDownTriggerDistance: 24
+  tipDownSpeed: 5
   tipDownMax: 6
   targetPitch: 0.2
 --- !u!114 &2367196518170801298
@@ -132,16 +144,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8109670126012411584}
     m_Modifications:
-    - target: {fileID: 6168688126404197674, guid: e373f3e7cb81856418a225d798255afa,
-        type: 3}
-      propertyPath: m_Name
-      value: Airplane Crash
-      objectReference: {fileID: 0}
-    - target: {fileID: 6168688126404197674, guid: e373f3e7cb81856418a225d798255afa,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6168688126404197670, guid: e373f3e7cb81856418a225d798255afa,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -197,6 +199,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6168688126404197674, guid: e373f3e7cb81856418a225d798255afa,
+        type: 3}
+      propertyPath: m_Name
+      value: Airplane Crash
+      objectReference: {fileID: 0}
+    - target: {fileID: 6168688126404197674, guid: e373f3e7cb81856418a225d798255afa,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e373f3e7cb81856418a225d798255afa, type: 3}
 --- !u!1 &6053047649598864109 stripped
@@ -218,11 +230,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8109670126012411584}
     m_Modifications:
-    - target: {fileID: 6168688126404197674, guid: b1203d347ef101744816fd6fdf205efd,
-        type: 3}
-      propertyPath: m_Name
-      value: Airplane Visuals
-      objectReference: {fileID: 0}
+    - target: {fileID: 721730228, guid: b1203d347ef101744816fd6fdf205efd, type: 3}
+      propertyPath: actualPlane
+      value: 
+      objectReference: {fileID: 8857060703963378809}
+    - target: {fileID: 721730228, guid: b1203d347ef101744816fd6fdf205efd, type: 3}
+      propertyPath: crashedPlane
+      value: 
+      objectReference: {fileID: 6053047649598864109}
     - target: {fileID: 6168688126404197670, guid: b1203d347ef101744816fd6fdf205efd,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -278,14 +293,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 721730228, guid: b1203d347ef101744816fd6fdf205efd, type: 3}
-      propertyPath: actualPlane
-      value: 
-      objectReference: {fileID: 8857060703963378809}
-    - target: {fileID: 721730228, guid: b1203d347ef101744816fd6fdf205efd, type: 3}
-      propertyPath: crashedPlane
-      value: 
-      objectReference: {fileID: 6053047649598864109}
+    - target: {fileID: 6168688126404197674, guid: b1203d347ef101744816fd6fdf205efd,
+        type: 3}
+      propertyPath: m_Name
+      value: Airplane Visuals
+      objectReference: {fileID: 0}
     - target: {fileID: 6168688126404197675, guid: b1203d347ef101744816fd6fdf205efd,
         type: 3}
       propertyPath: _target
@@ -306,10 +318,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8109670126012411584}
     m_Modifications:
-    - target: {fileID: 748107487360155480, guid: 917e0675d5b82954ba6ee374508d7c5a,
-        type: 3}
-      propertyPath: m_Name
-      value: Airplane CenterOfMass
+    - target: {fileID: 720826035, guid: 917e0675d5b82954ba6ee374508d7c5a, type: 3}
+      propertyPath: Debugs
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 753522773, guid: 917e0675d5b82954ba6ee374508d7c5a, type: 3}
+      propertyPath: Debugs
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1765538573, guid: 917e0675d5b82954ba6ee374508d7c5a, type: 3}
+      propertyPath: Debugs
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 748107487360155476, guid: 917e0675d5b82954ba6ee374508d7c5a,
         type: 3}
@@ -366,17 +385,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1765538573, guid: 917e0675d5b82954ba6ee374508d7c5a, type: 3}
-      propertyPath: Debugs
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 720826035, guid: 917e0675d5b82954ba6ee374508d7c5a, type: 3}
-      propertyPath: Debugs
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 753522773, guid: 917e0675d5b82954ba6ee374508d7c5a, type: 3}
-      propertyPath: Debugs
-      value: 0
+    - target: {fileID: 748107487360155480, guid: 917e0675d5b82954ba6ee374508d7c5a,
+        type: 3}
+      propertyPath: m_Name
+      value: Airplane CenterOfMass
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 917e0675d5b82954ba6ee374508d7c5a, type: 3}

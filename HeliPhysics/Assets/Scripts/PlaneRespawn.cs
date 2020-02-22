@@ -12,13 +12,10 @@ public class PlaneRespawn : MonoBehaviour
     [SerializeField] private CameraPivot cameraPivot;
     [SerializeField] private FOVbySpeed cameraFOV;
 
-    private LandingStrip[] landingStrips;
-
     // Start is called before the first frame update
     void Start()
     {
-        landingStrips = FindObjectsOfType<LandingStrip>();
-        SpawnPlane(transform.position, new Vector3(-4, transform.rotation.y + 90, 0));
+        SpawnPlane(transform.position);
     }
 
     // Update is called once per frame
@@ -28,12 +25,10 @@ public class PlaneRespawn : MonoBehaviour
         {
             resetUI.SetActive(true);
             fuelUI.transform.parent.gameObject.SetActive(false);
-            Cursor.lockState = CursorLockMode.None;
         }
-        if (planeCrash.activeSelf && Input.GetKeyDown(KeyCode.Mouse0))
-        {
+
+        if (Input.GetKeyDown(KeyCode.R))
             ClickReset();
-        }
     }
 
     public void ClickReset()
@@ -42,29 +37,10 @@ public class PlaneRespawn : MonoBehaviour
         fuelUI.transform.parent.gameObject.SetActive(true);
         Cursor.lockState = CursorLockMode.Locked;
 
-        LandingStrip closestStripToCamera = null;
-        float closestDistance = 0;
-        foreach(LandingStrip strip in landingStrips)
-        {
-            if (closestStripToCamera == null)
-            {
-                closestStripToCamera = strip;
-                closestDistance = Vector3.Distance(strip.transform.position, cameraPivot.transform.position);
-                continue;
-            }
-
-            float myDistance = Vector3.Distance(strip.transform.position, cameraPivot.transform.position);
-            if (myDistance < closestDistance)
-            {
-                closestStripToCamera = strip;
-                closestDistance = myDistance;
-            }
-        }
-
-        SpawnPlane(closestStripToCamera.transform.position - closestStripToCamera.transform.forward * closestStripToCamera.stripLength / 2.1f, new Vector3(-4, closestStripToCamera.transform.rotation.y + 90, 0));
+        SpawnPlane(transform.position);
     }
 
-    private void SpawnPlane(Vector3 pPosition, Vector3 pRotation)
+    private void SpawnPlane(Vector3 pPosition)
     {
         // Destroy Previous Plane
         if (plane != null) Destroy(plane);
@@ -74,9 +50,7 @@ public class PlaneRespawn : MonoBehaviour
 
         // Position Plane
         plane.transform.position = pPosition;
-        plane.transform.rotation = Quaternion.Euler(pRotation);
-
-        cameraPivot.transform.rotation = plane.transform.rotation;
+        plane.transform.rotation = Quaternion.Euler(0, Random.value * 360, 0);
 
         // Set Variables
         plane.GetComponentInChildren<PlaneVisuals>().camera = cameraPivot;

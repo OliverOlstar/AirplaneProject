@@ -51,9 +51,9 @@ public class Landing : MonoBehaviour, IState
         MakeParallel();
         LevelOut();
 
-        if (_enabled == true && _physics._velocity.magnitude <= 0.2f)
+        if (_enabled == true && _physics._velocity.magnitude <= 5f)
         {
-            StartCoroutine("CrashSelfRoutine");
+            transform.GetComponentInChildren<PlaneCrash>().Crashed();
             _enabled = false;
         }
     }
@@ -87,17 +87,5 @@ public class Landing : MonoBehaviour, IState
     {
         _controller.pitch = (_physics._verticalVelocity.y + targetPitch) * pitchSpeed;
         _controller.roll = -_physics._angluarVelocity.y * rollSpeed;
-    }
-
-    private IEnumerator CrashSelfRoutine()
-    {
-        yield return new WaitForSeconds(10);
-        transform.GetComponentInChildren<PlaneCrash>().Crashed();
-    }
-
-    private IEnumerator DestroySelfRoutine()
-    {
-        yield return new WaitForSeconds(20);
-        Destroy(transform.parent.gameObject);
     }
 }
