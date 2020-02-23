@@ -286,8 +286,6 @@ GameObject:
   - component: {fileID: 13360257}
   - component: {fileID: 13360256}
   - component: {fileID: 13360260}
-  - component: {fileID: 13360261}
-  - component: {fileID: 13360262}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -369,6 +367,7 @@ RectTransform:
   - {fileID: 1606991415}
   - {fileID: 1557676088}
   - {fileID: 570877689}
+  - {fileID: 2080451218}
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -391,42 +390,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   toggleUI: {fileID: 570877688}
   button: 120
---- !u!114 &13360261
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 13360255}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9dfb811e204473e408eb137cd4c9af25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textCount: 5
-  textDisplayLength: 4
-  textPrefab: {fileID: 4605526135362899769, guid: e7f3644c6bbe8204796dd74070b4686f,
-    type: 3}
-  defaultPos: {x: 38, y: 87}
-  additivePos: {x: 0, y: 22}
---- !u!114 &13360262
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 13360255}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f85be0ff16dd904ba3541867624fa9a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  achievementHUD: {fileID: 13360261}
-  collectablesText:
-  - Flags
-  - Coins
-  - Fly Unders
-  - Runways
 --- !u!1001 &20402139
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5733,10 +5696,10 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 754932328}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 3
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 14
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &754932330
@@ -14835,6 +14798,79 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d51eaa14ea6d85549b46b4e98d88b634, type: 3}
+--- !u!1 &2080451217
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2080451218}
+  - component: {fileID: 2080451220}
+  - component: {fileID: 2080451219}
+  m_Layer: 5
+  m_Name: Empty
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2080451218
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2080451217}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 13360259}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 62, y: 147}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0, y: 0}
+--- !u!114 &2080451219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2080451217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dfb811e204473e408eb137cd4c9af25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textCount: 5
+  textDisplayLength: 4
+  textPrefab: {fileID: 4605526135362899769, guid: e7f3644c6bbe8204796dd74070b4686f,
+    type: 3}
+  defaultPos: {x: 0, y: 0}
+  additivePos: {x: 0, y: 22}
+--- !u!114 &2080451220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2080451217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f85be0ff16dd904ba3541867624fa9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  achievementHUD: {fileID: 2080451219}
+  collectablesText:
+  - Flags
+  - Coins
+  - Fly Unders
+  - Runways
 --- !u!1001 &2080685061
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15699,7 +15735,7 @@ PrefabInstance:
     - target: {fileID: 4766657839587240976, guid: f57d3d8131baae344b885a0309d8d9b5,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1075.29
+      value: 1123.1
       objectReference: {fileID: 0}
     - target: {fileID: 4766657839587240976, guid: f57d3d8131baae344b885a0309d8d9b5,
         type: 3}

@@ -19,6 +19,8 @@ public class AchievementHUD : MonoBehaviour
 
     private void Start()
     {
+        defaultPos = GetComponent<RectTransform>().position;
+
         texts = new Text[textCount];
 
         for (int i = 0; i < textCount; i++)
@@ -26,6 +28,16 @@ public class AchievementHUD : MonoBehaviour
             texts[i] = Instantiate(textPrefab).GetComponent<Text>();
             texts[i].rectTransform.SetParent(transform);
             texts[i].rectTransform.localScale = new Vector3(0.5f, 0.5f, 1.0f);
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            ShowText(0, "HELLO");
+            ShowText(1, "HELLO2");
+
         }
     }
 

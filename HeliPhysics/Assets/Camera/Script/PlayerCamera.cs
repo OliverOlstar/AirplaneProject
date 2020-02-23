@@ -74,8 +74,8 @@ public class PlayerCamera : MonoBehaviour
         //Rotation of the camera based on mouse movement
         if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
         {
-            _LocalRotation.x += Input.GetAxis("Mouse X") * MouseSensitivity;
-            _LocalRotation.y -= Input.GetAxis("Mouse Y") * MouseSensitivity;
+            _LocalRotation.x += Input.GetAxis("Mouse X") * MouseSensitivity * Time.deltaTime;
+            _LocalRotation.y -= Input.GetAxis("Mouse Y") * MouseSensitivity * Time.deltaTime;
 
             //Clamping the y rotation to horizon and not flipping over at the top
             if (_LocalRotation.y < CameraMinHeight)

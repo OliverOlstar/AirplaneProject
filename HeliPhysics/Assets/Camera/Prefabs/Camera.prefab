@@ -161,7 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50f8d9f3f6ee2284db7ec868235424a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _physics: {fileID: 0}
+  physics: {fileID: 0}
   minFOV: 70
   maxFOV: 102
   velMult: 1
@@ -183,7 +183,7 @@ MonoBehaviour:
     m_Bits: 1
   cameraCollisionDampening: 15
   cameraCollisionMinDisPercent: 0.3
-  MouseSensitivity: 5
+  MouseSensitivity: 100
   TurnDampening: 18
   OffSetLeft: 0
   CameraDistance: 8
